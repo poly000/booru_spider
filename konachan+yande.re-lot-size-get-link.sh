@@ -53,13 +53,12 @@ wget https://$BOORU/post.json?tags=$TAGS\&page=1 -o /dev/null -O -|jq .|grep fil
 [Aa])
 echo 请到 https://$BOORU/post?tags=$TAGS 手动查看最大page（纯数字）
 read PAGE_MAX
-rm -rf ___tmp___
 mkdir ___tmp___
-(
 cd ___tmp___
 echo -e for PAGE in {1..$PAGE_MAX}\\ndo echo https://$BOORU/post.json?tags=$TAGS\\\&page=\$PAGE \>\> List\\ndone|bash
-aria2c -j $PAGE_MAX -i List
+aria2c -j $PAGE_MAX -i List #--http-proxy= --https-proxy=
 cat *json|jq .|grep file_url|sed -s 's/"file_url": "//g'|sed -s 's/",//g'|sed -s 's/    //g'>../link-list
-)
+cd ..
+rm -rf ___tmp___
 ;;
 esac
