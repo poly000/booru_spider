@@ -1,20 +1,22 @@
 #!/bin/bash
 a()
 {
-echo 请输入搜索tag的关键词
+echo 请输入搜索tag的关键词\(输入n跳过搜索\)
 read TAGS
-if [ x$TAGS = x ]
-then a
-else b
+if [ ! x$TAGS = xn ]
+then if [ x$TAGS = x ]
+     then a
+     else b
+     fi
 fi
 }
 b()
 {
 echo Konachan:
-wget https://konachan.net/tag.json?name=$TAGS -o /dev/null -O -|jq .|grep $TAGS|sed -s 's\",\\g'|sed -s 's\"\\g'|sed -s s/name://g
+wget https://konachan.net/tag.json?name=$TAGS -o /dev/null -O -|jq .|grep -i $TAGS|sed -s 's\",\\g'|sed -s 's\"\\g'|sed -s s/name://g
 echo
 echo Yande.re:
-wget https://yande.re/tag.json?name=$TAGS -o /dev/null -O -|jq .|grep $TAGS|sed -s 's\",\\g'|sed -s 's\"\\g'|sed -s s/name://g
+wget https://yande.re/tag.json?name=$TAGS -o /dev/null -O -|jq .|grep -i $TAGS|sed -s 's\",\\g'|sed -s 's\"\\g'|sed -s s/name://g
 echo
 echo 需要搜索下一个tag吗？（多tag请用“+”连接）（y/*）
 read -s -n 1 AGAIN
@@ -51,15 +53,13 @@ wget https://$BOORU/post.json?tags=$TAGS\&page=1 -o /dev/null -O -|jq .|grep fil
 [Aa])
 echo 请到 https://$BOORU/post?tags=$TAGS 手动查看最大page（纯数字）
 read PAGE_MAX
+rm -rf ___tmp___
 mkdir ___tmp___
+(
 cd ___tmp___
-for PAGE in {1..$PAGE_MAX}
-do echo https://$BOORU/post.json?tags=$TAGS\&page=$PAGE >> List
-done
+echo -e for PAGE in {1..$PAGE_MAX}\\ndo echo https://$BOORU/post.json?tags=$TAGS\\\&page=\$PAGE \>\> List\\ndone|bash
 aria2c -j $PAGE_MAX -i List
 cat *json|jq .|grep file_url|sed -s 's/"file_url": "//g'|sed -s 's/",//g'|sed -s 's/    //g'>../link-list
-cd ..
-rm -rf ___tmp___
+)
 ;;
 esac
-echo 已输出到link-list
