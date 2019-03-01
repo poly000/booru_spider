@@ -56,9 +56,10 @@ read PAGE_MAX
 mkdir ___tmp___
 cd ___tmp___
 echo -e for PAGE in {1..$PAGE_MAX}\\ndo echo https://$BOORU/post.json?tags=$TAGS\\\&page=\$PAGE \>\> List\\ndone|bash
-aria2c -j $PAGE_MAX -i List #--http-proxy= --https-proxy=
+aria2c -j 15 -i List #--http-proxy= --https-proxy= #请依据网络情况修改-j num
 cat *json|jq .|grep file_url|sed -s 's/"file_url": "//g'|sed -s 's/",//g'|sed -s 's/    //g'>../link-list
 cd ..
 rm -rf ___tmp___
 ;;
 esac
+
