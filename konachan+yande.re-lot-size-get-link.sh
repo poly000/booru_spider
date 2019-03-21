@@ -53,8 +53,8 @@ wget https://$booru/post.json?tags=${tags}\&page=1 -o /dev/null -O -|jq .|grep f
 [Aa])
 mkdir ___tmp___
 cd ___tmp___
-wget https://$booru/post\?tags\=${tags} -o /dev/null -O - |sed -s 's/ /\n/g'|grep href|tail -n 12|sed -s 's/&amp;/\n/g'|head -n 1|sed -s 's\href="/post?page=\\g'|read page_max
-echo 请输入要下载多少页（最多$page_max）
+wget https://$booru/post\?tags\=${tags} -o /dev/null -O - |sed -s 's/ /\n/g'|grep href|tail -n 12|sed -s 's/&amp;/\n/g'|head -n 1|sed -s 's\href="/post?page=\\g'>page
+echo 请输入要下载多少页（最多`cat page`）
 read page_max
 page=0
 while [ $page -le $page_max ]
