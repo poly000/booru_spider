@@ -13,11 +13,13 @@ fi
 b()
 {
 echo Konachan:
-wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|jq .|grep -i ${tags}|sed -s 's\",\\g'|sed -s 's\"\\g'|sed -s s/name://g
+wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|jq .|grep -i ${tags}|sed -s 's\",\\g'|sed -s 's\"\\g'|sed -s s/name://g|more
 echo
 echo Yande.re:
-wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|jq .|grep -i ${tags}|sed -s 's\",\\g'|sed -s 's\"\\g'|sed -s s/name://g
+wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|jq .|grep -i ${tags}|sed -s 's\",\\g'|sed -s 's\"\\g'|sed -s s/name://g|more
 echo
+echo Danbooru:
+wget https://danbooru.donmai.us/tag.json?name=${tags} -o /dev/null -O -|jq .|grep -i ${tags}|sed -s 's\",\\g'|sed 's\"\\g'|sed -s s/name://g|more
 echo 需要搜索下一个tag吗？（多tag请用“+”连接）（y/*）
 read -s -n 1 again
 case $again in
@@ -30,9 +32,12 @@ a
 esac
 }
 a
-echo 请选择图站（K/Y）
+echo 请选择图站（D/K/Y）
 read -s -n 1 booru
 case $booru in
+[Dd])
+booru=danbooru.donmai.us
+;;
 [Kk])
 booru=konachan.net
 ;;
