@@ -53,10 +53,9 @@ wget https://$BOORU/post.json?tags=${TAGS}\&page=1 -o /dev/null -O -|jq .|grep f
 [Aa])
 mkdir ___tmp___
 cd ___tmp___
-wget https://$BOORU/post\?tags\=${TAGS} -o /dev/null -O - |sed -s 's/ /\n/g'|grep href|tail -n 12|sed -s 's/&amp;/\n/g'|head -n 1|sed -s 's\href="/post?page=\\g'>PAGE
-echo 请输入要下载多少页（最多`cat PAGE`）
+wget https://$BOORU/post\?tags\=${TAGS} -o /dev/null -O - |sed -s 's/ /\n/g'|grep href|tail -n 12|sed -s 's/&amp;/\n/g'|head -n 1|sed -s 's\href="/post?page=\\g'|read PAGE_MAX
+echo 请输入要下载多少页（最多$PAGR_MAX）
 read PAGE_MAX
-# echo -e for PAGE in {1..$PAGE_MAX}\\ndo echo https://$BOORU/post.json?tags=$TAGS\\\&page=\$PAGE \>\> List\\ndone|bash
 PAGE=0
 while [ $PAGE -le $PAGE_MAX ]
 do PAGE=$((PAGE+1))
