@@ -51,7 +51,8 @@ echo 需要下载？
 echo o 仅第一页，即最新
 echo a 所有页数
 read -s -n 1 page
-case $page in
+if [ $booru != danbooru.donmai.us ]
+then case $page in
 [Oo])
 wget https://$booru/post.json?tags=${tags}\&page=1 -o /dev/null -O -|jq .|grep file_url|sed -s 's/"file_url": "//g'|sed -s 's/",//g'|sed -s 's/    //g'|dd of=link-list
 ;;
@@ -72,4 +73,25 @@ cd ..
 rm -rf ___tmp___
 ;;
 esac
+else case $page in
+[Oo])
+wget https://$booru/post.json?tags=${tags}\&page=1 -o /dev/null -O -|jq .|grep file_url|sed -s 's/"file_url": "//g'|sed -s 's/",//g'|sed -s 's/    //g'|dd of=link-list
+;;
+[Aa])
+mkdir ___tmp___
+cd ___tmp___
+echo 请输入要下载多少页（最多1000）
+read page_max
+page=0
+while [ $page -le $page_max ]
+do page=$((page+1))
+	echo https://$booru/post.json?tags=${tags}\&page=$page >> List
+done
+aria2c -i List #--http-proxy= --https-proxy=
+cat posts*|jq .|grep file_url|sed -s 's/"file_url": "//g'|sed -s 's/",//g'|sed -s 's/    //g'>../link-list
+cd ..
+rm -rf ___tmp___
+;;
+esac
+fi
 unset booru page page_max tags
