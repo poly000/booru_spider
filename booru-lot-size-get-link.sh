@@ -88,17 +88,19 @@ tail -n 12|
 sed -s 's/&amp;/\n/g'|
 head -n 1|
 sed -s 's\href="/post?page=\\g'>page
-echo 请输入要下载多少页（最多`cat page`）
+echo 请输入要下载多少页（默认`cat page`）
+read page_max
+  if [ 0$page_max = 0 ]
+  then page_max=`cat page`
+  fi
 else echo 请输入要下载多少页（最多1000）
 fi
-read page_max
 page=0
-page_max=$((page_max-1))
-while [ $page -le $page_max ]
+while [ $page -lt $page_max ]
 do page=$((page+1))
 	echo https://$booru.json?tags=${tags}\&page=$page >> List
 done
-aria2c -i List #--http-proxy= --https-proxy=
+aria2c -i List #-j num #--http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
 cat ${booru#*/}*|
 jq .|
 grep \"file_url|
@@ -108,4 +110,4 @@ cd ..
 rm -rf ___tmp___
 ;;
 esac
-unset booru page page_max tags
+
