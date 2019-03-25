@@ -78,8 +78,8 @@ sed -s 's/",//g'|
 dd of=link-list
 ;;
 [Aa])
-mkdir ___tmp___
-cd ___tmp___
+path=`pwd`
+cd `mktemp -td dir.XXXXXXXX`
 if [ $booru != danbooru.donmai.us/posts ]
 then wget https://$booru\?tags\=${tags} -o /dev/null -O - |
 sed -s 's/ /\n/g'|
@@ -105,9 +105,7 @@ cat ${booru#*/}*|
 jq .|
 grep \"file_url|
 sed -s 's/    "file_url": "//g'|
-sed -s 's/",//g'>../link-list
-cd ..
-rm -rf ___tmp___
+sed -s 's/",//g'>$path/link-list
 ;;
 esac
 
