@@ -4,7 +4,7 @@
 # Poly000
 # 可以爬取booru图链接为链接列表。
 # 需要包：jq aria2 kdialog
-# 本脚本遵循GPL 3.0协议
+# 本脚本遵循MIT协议
 # v1.0.6  修复kdialog错误
 # v1.0.5b 使用kdialog
 # v1.0.4  初步支持Danbooru
