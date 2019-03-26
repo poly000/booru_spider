@@ -1,83 +1,49 @@
 #!/bin/bash
-a()
-{
-echo 请输入搜索tag的关键词\(输入n跳过搜索\)
-read tags
-if [ ! x${tags} = xn ]
-then if [ x${tags} = x ]
+a(){
+if tags=`kdialog --inputbox 请输入搜索tag的关键词 2>/dev/null`
+then if [ x = x$tags ]
      then a
-     else b
      fi
 fi
 }
-b()
-{
-echo Konachan:
-wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|
-jq .|
-grep -i ${tags}|
-sed -s 's\",\\g'|
-sed -s 's\"\\g'|
-sed -s s/name://g|
-more
-echo
-echo Yande.re:
-wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|
-jq .|grep -i ${tags}|
-sed -s 's\",\\g'|
-sed -s 's\"\\g'|
-sed -s s/name://g|
-more
-echo
-echo Danbooru:
-wget https://danbooru.donmai.us/tags.json?name=${tags} -o /dev/null -O -|
-jq .|
-grep -i ${tags}|
-sed -s 's\",\\g'|
-sed 's\"\\g'|
-sed -s s/name://g|
-more
-echo 需要搜索下一个tag吗？（多tag请用“+”连接）（y/*）
-read -s -n 1 again
-case $again in
-[Yy])
 a
-;;
-*)
-:
-;;
-esac
-}
-a
-echo 请选择图站（D/K/Y）
-read -s -n 1 booru
+if [ x != x$tags ]
+then
+	kdialog --msgbox 开始搜索... 2>/dev/null
+	temp=`mktemp -t temp.XXXXXXXX`
+	echo Konachan: > $temp
+	wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|
+	jq .|
+	grep -i ${tags}|
+	sed -s 's\",\\g'|
+	sed -s 's\"\\g'|
+	sed -s s/name://g>> $temp
+	echo Yande.re:>> $temp
+	wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|
+	jq .|grep -i ${tags}|
+	sed -s 's\",\\g'|
+	sed -s 's\"\\g'|
+	sed -s s/name://g>> $temp
+	echo Danbooru:>> $temp
+	echo -e \\t暂不支持搜索>> $temp
+	kdialog --textbox $temp 450 675 2>/dev/null
+	if kdialog --yesno 需要搜索下一个tag吗？ 2>/dev/null
+	then	a
+	fi
+fi
+booru=`kdialog --menu 请选择图站 1 Danbooru 2 Konachan 3 Yande.re 2>/dev/null`
 case $booru in
-[Dd])
+1)
 booru=danbooru.donmai.us/posts
 ;;
-[Kk])
+2)
 booru=konachan.net/post
 ;;
-[Yy])
+3)
 booru=yande.re/post
 ;;
 esac
-echo 请输入需要的tag（多tag请用“+”连接）
-read tags
-echo 需要下载？
-echo o 仅第一页，即最新
-echo a 所有页数
-read -s -n 1 page
-case $page in
-[Oo])
-wget https://$booru.json?tags=${tags}\&page=1 -o /dev/null -O -|
-jq .|
-grep \"file_url|
-sed -s 's/    "file_url": "//g'|
-sed -s 's/",//g'|
-dd of=link-list
-;;
-[Aa])
+tags=`kdialog --inputbox 请输入需要的tag（多tag请用“+”连接） 2>/dev/null`
 path=`pwd`
 cd `mktemp -td dir.XXXXXXXX`
 if [ $booru != danbooru.donmai.us/posts ]
@@ -88,12 +54,11 @@ tail -n 12|
 sed -s 's/&amp;/\n/g'|
 head -n 1|
 sed -s 's\href="/post?page=\\g'>page
-echo 请输入要下载多少页（默认`cat page`）
-read page_max
-  if [ 0$page_max = 0 ]
-  then page_max=`cat page`
-  fi
-else echo 请输入要下载多少页（最多1000）
+page_max=`kdialog --inputbox 请输入要下载多少页（默认为最大值）`
+if [ 0$page_max = 0 ]
+then page_max=`cat page`
+fi
+else echo page_max=`kdialog --inputbox 请输入要下载多少页（至多未知，也许120）`
 fi
 page=0
 while [ $page -lt $page_max ]
@@ -106,6 +71,3 @@ jq .|
 grep \"file_url|
 sed -s 's/    "file_url": "//g'|
 sed -s 's/",//g'>$path/link-list
-;;
-esac
-
