@@ -5,7 +5,7 @@
 
 之后会支持Gelbooru.
 
-<br><br><br>
+<br>
 
 # 更新历史
 
