@@ -17,7 +17,7 @@
 # v1.0.0  实现搜索标签
 
 function save_file(){
-	path=`kdialog --getsavefilename : "*.txt" 2>/dev/null`
+	path=`kdialog --getsavefilename $HOME "*.txt" 2>/dev/null`
 	if [ x$path = x ]
 	then save_file
 	fi
