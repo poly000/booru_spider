@@ -118,5 +118,5 @@ grep \"file_url|
 sed -s 's/    "file_url": "//g'|
 sed -s 's/",//g'>$temp2
 path=`kdialog --getsavefilename : "*.txt" 2>/dev/null`
-mv $temp2 $path
-rm -rf $temp0 $temp1
+cp $temp2 $path
+rm -rf $temp0 $temp1 $temp2
