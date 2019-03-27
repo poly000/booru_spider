@@ -1,11 +1,12 @@
 #!/bin/bash
 
-# v1.1.0
+# v1.1.1
 
 # 2019年 03月 27日 星期三 23:23:40 CST
 # Poly000
 # 可以爬取booru图链接为链接列表。
 
+# v1.1.1  修复tag无结果或单页后until死循环
 # v1.1.0  修复获取的tags_page，修复保存问题
 # v1.1.0b 添加后台运行、stderr重定向，修复一处函数引用，修复tags仅搜索第一page，支持从非终端启动（选择输出目录）
 # v1.0.6  修复kdialog错误
@@ -46,21 +47,31 @@ then
 	sed -s 's/">/\n/g'|    
 	sed -n 29p>tags
 	max_tags=`cat tags`
-	page_tags=0
-	rm tags
-	until [ $page_tags = $max_tags ]
-	do	page_tags=$((page_tags+1))
-		echo https://konachan.net/tag.json?name=${tags}\&page\=$page_tags >> tags
-	done
-	aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
-	cat tag.*|
-	jq .|
-	grep name|
-	grep -i ${tags}|
-	sed -s 's\",\\g'|
-	sed -s 's\"\\g'|
-	sed -s s/name://g>> $temp1
-	rm tag*
+	if [ x$max_tags != x ]
+	then	page_tags=0
+		rm tags
+		until [ $page_tags = $max_tags ]
+		do	page_tags=$((page_tags+1))
+			echo https://konachan.net/tag.json?name=${tags}\&page\=$page_tags >> tags
+		done
+		aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
+		cat tag.*|
+		jq .|
+		grep name|
+		grep -i ${tags}|
+		sed -s 's\",\\g'|
+		sed -s 's\"\\g'|
+		sed -s s/name://g>> $temp1
+		rm tag*
+	else	wget https://konachan.net/tag.json?name=${tags}|
+		jq .|
+		grep name|
+		grep -i ${tags}|
+		sed -s 's\",\\g'|
+		sed -s 's\"\\g'|
+		sed -s s/name://g>> $temp1
+		rm tag*
+	fi
 	echo Yande.re:>> $temp1
 	wget https://yande.re/tag?name=${tags} -o /dev/null -O -|
 	grep next_page|
@@ -69,20 +80,31 @@ then
 	sed -s 's/">/\n/g'|    
 	sed -n 29p>tags
 	max_tags=`cat tags`
-	page_tags=0
-	rm tags
-	until [ $page_tags = $max_tags ]
-	do	page_tags=$((page_tags+1))
-		echo https://yande.re/tag.json?name=${tags}\&page\=$page_tags >> tags
-	done
-	aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
-	cat tag.*|
-	jq .|
-	grep name|
-	grep -i ${tags}|
-	sed -s 's\",\\g'|
-	sed -s 's\"\\g'|
-	sed -s s/name://g>> $temp1
+	if [ x$max_tags != x ]
+	then	page_tags=0
+		rm tags
+		until [ $page_tags = $max_tags ]
+		do	page_tags=$((page_tags+1))
+			echo https://yande.re/tag.json?name=${tags}\&page\=$page_tags >> tags
+		done
+		aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
+		cat tag.*|
+		jq .|
+		grep name|
+		grep -i ${tags}|
+		sed -s 's\",\\g'|
+		sed -s 's\"\\g'|
+		sed -s s/name://g>> $temp1
+		rm tag*
+	else	wget https://yande.re/tag.json?name=${tags}|
+		jq .|
+		grep name|
+		grep -i ${tags}|
+		sed -s 's\",\\g'|
+		sed -s 's\"\\g'|
+		sed -s s/name://g>> $temp1
+		rm tag*
+	fi
 	echo Danbooru:>> $temp1
 	echo -e \\t暂不支持搜索>> $temp1
 	kdialog --textbox $temp1 450 675 2>/dev/null &
