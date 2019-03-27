@@ -1,10 +1,12 @@
 #!/bin/bash
+
 # v1.1.0b
 # 2019年 03月 26日 星期二 22:35:05 CST
 # Poly000
 # 可以爬取booru图链接为链接列表。
 # 需要包：jq aria2 kdialog
 # 本脚本遵循MIT协议
+# v1.1.0  修复获取的tags_page，修复保存问题
 # v1.1.0b 添加后台运行、stderr重定向，修复一处函数引用，修复tags仅搜索第一page，支持从非终端启动（选择输出目录）
 # v1.0.6  修复kdialog错误
 # v1.0.5b 使用kdialog
@@ -13,15 +15,24 @@
 # v1.0.2  优化代码
 # v1.0.1  修复page_max问题
 # v1.0.0  实现搜索标签
+
+function save_file(){
+	path=`kdialog --getsavefilename : "*.txt" 2>/dev/null`
+	if [ x$path = x ]
+	then save_file
+	fi
+}
+
+function search_tags(){
+	if tags=`kdialog --inputbox 请输入搜索tag的关键词 2>/dev/null`
+	then if [ x = x$tags ]
+	     then search_tags
+	     fi
+	fi
+}
+
 temp0=`mktemp -td dir.XXXXXXXX`
 cd $temp0
-search_tags(){
-if tags=`kdialog --inputbox 请输入搜索tag的关键词 2>/dev/null`
-then if [ x = x$tags ]
-     then search_tags
-     fi
-fi
-}
 search_tags
 if [ x != x$tags ]
 then
@@ -32,7 +43,8 @@ then
 	grep next_page|
 	sed -s 's/&amp;type=">/\n/g'|
 	sed -s 's/</\n/g'|
-	sed -n 25p>tags
+	sed -s 's/">/\n/g'|    
+	sed -n 29p>tags
 	max_tags=`cat tags`
 	page_tags=0
 	rm tags
@@ -54,7 +66,8 @@ then
 	grep next_page|
 	sed -s 's/&amp;type=">/\n/g'|
 	sed -s 's/</\n/g'|
-	sed -n 25p>tags
+	sed -s 's/">/\n/g'|    
+	sed -n 29p>tags
 	max_tags=`cat tags`
 	page_tags=0
 	rm tags
@@ -117,6 +130,6 @@ jq .|
 grep \"file_url|
 sed -s 's/    "file_url": "//g'|
 sed -s 's/",//g'>$temp2
-path=`kdialog --getsavefilename : "*.txt" 2>/dev/null`
+save_file
 cp $temp2 $path
 rm -rf $temp0 $temp1 $temp2
