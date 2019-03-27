@@ -63,7 +63,7 @@ then
 		sed -s 's\"\\g'|
 		sed -s s/name://g>> $temp1
 		rm tag*
-	else	wget https://konachan.net/tag.json?name=${tags}|
+	else	wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|
 		jq .|
 		grep name|
 		grep -i ${tags}|
@@ -96,7 +96,7 @@ then
 		sed -s 's\"\\g'|
 		sed -s s/name://g>> $temp1
 		rm tag*
-	else	wget https://yande.re/tag.json?name=${tags}|
+	else	wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|
 		jq .|
 		grep name|
 		grep -i ${tags}|
