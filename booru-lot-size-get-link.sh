@@ -17,6 +17,9 @@
 # v1.0.1  修复page_max问题
 # v1.0.0  实现搜索标签
 
+temp0=`mktemp -td dir.XXXXXXXX`
+cd $temp0
+
 function save_file(){
 	path=`kdialog --getsavefilename $HOME "*.txt" 2>/dev/null`
 	if [ x$path = x ]
@@ -30,88 +33,87 @@ function search_tags(){
 	     then search_tags
 	     fi
 	fi
+	if [ x != x$tags ]
+	then
+		kdialog --msgbox 开始搜索... 2>/dev/null &
+		temp1=`mktemp -t temp.XXXXXXXX`
+		echo Konachan: > $temp1
+		wget https://konachan.net/tag?name=${tags} -o /dev/null -O -|
+		grep next_page|
+		sed -s 's/&amp;type=">/\n/g'|
+		sed -s 's/</\n/g'|
+		sed -s 's/">/\n/g'|    
+		sed -n 29p>tags
+		max_tags=`cat tags`
+		if [ x$max_tags != x ]
+		then	page_tags=0
+			rm tags
+			until [ $page_tags = $max_tags ]
+			do	page_tags=$((page_tags+1))
+				echo https://konachan.net/tag.json?name=${tags}\&page\=$page_tags >> tags
+			done
+			aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
+			cat tag.*|
+			jq .|
+			grep name|
+			grep -i ${tags}|
+			sed -s 's\",\\g'|
+			sed -s 's\"\\g'|
+			sed -s s/name://g>> $temp1
+			rm tag*
+		else	wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|
+			jq .|
+			grep name|
+			grep -i ${tags}|
+			sed -s 's\",\\g'|
+			sed -s 's\"\\g'|
+			sed -s s/name://g>> $temp1
+			rm tag*
+		fi
+		echo Yande.re:>> $temp1
+		wget https://yande.re/tag?name=${tags} -o /dev/null -O -|
+		grep next_page|
+		sed -s 's/&amp;type=">/\n/g'|
+		sed -s 's/</\n/g'|
+		sed -s 's/">/\n/g'|    
+		sed -n 29p>tags
+		max_tags=`cat tags`
+		if [ x$max_tags != x ]
+		then	page_tags=0
+			rm tags
+			until [ $page_tags = $max_tags ]
+			do	page_tags=$((page_tags+1))
+				echo https://yande.re/tag.json?name=${tags}\&page\=$page_tags >> tags
+			done
+			aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
+			cat tag.*|
+			jq .|
+			grep name|
+			grep -i ${tags}|
+			sed -s 's\",\\g'|
+			sed -s 's\"\\g'|
+			sed -s s/name://g>> $temp1
+			rm tag*
+		else	wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|
+			jq .|
+			grep name|
+			grep -i ${tags}|
+			sed -s 's\",\\g'|
+			sed -s 's\"\\g'|
+			sed -s s/name://g>> $temp1
+			rm tag*
+		fi
+		echo Danbooru:>> $temp1
+		echo -e \\t暂不支持搜索>> $temp1
+		kdialog --textbox $temp1 450 675 2>/dev/null &
+		if kdialog --yesno 需要搜索下一个tag吗？ 2>/dev/null
+		then	tags=
+			search_tags
+		fi
+	fi
 }
 
-temp0=`mktemp -td dir.XXXXXXXX`
-cd $temp0
 search_tags
-if [ x != x$tags ]
-then
-	kdialog --msgbox 开始搜索... 2>/dev/null &
-	temp1=`mktemp -t temp.XXXXXXXX`
-	echo Konachan: > $temp1
-	wget https://konachan.net/tag?name=${tags} -o /dev/null -O -|
-	grep next_page|
-	sed -s 's/&amp;type=">/\n/g'|
-	sed -s 's/</\n/g'|
-	sed -s 's/">/\n/g'|    
-	sed -n 29p>tags
-	max_tags=`cat tags`
-	if [ x$max_tags != x ]
-	then	page_tags=0
-		rm tags
-		until [ $page_tags = $max_tags ]
-		do	page_tags=$((page_tags+1))
-			echo https://konachan.net/tag.json?name=${tags}\&page\=$page_tags >> tags
-		done
-		aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
-		cat tag.*|
-		jq .|
-		grep name|
-		grep -i ${tags}|
-		sed -s 's\",\\g'|
-		sed -s 's\"\\g'|
-		sed -s s/name://g>> $temp1
-		rm tag*
-	else	wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|
-		jq .|
-		grep name|
-		grep -i ${tags}|
-		sed -s 's\",\\g'|
-		sed -s 's\"\\g'|
-		sed -s s/name://g>> $temp1
-		rm tag*
-	fi
-	echo Yande.re:>> $temp1
-	wget https://yande.re/tag?name=${tags} -o /dev/null -O -|
-	grep next_page|
-	sed -s 's/&amp;type=">/\n/g'|
-	sed -s 's/</\n/g'|
-	sed -s 's/">/\n/g'|    
-	sed -n 29p>tags
-	max_tags=`cat tags`
-	if [ x$max_tags != x ]
-	then	page_tags=0
-		rm tags
-		until [ $page_tags = $max_tags ]
-		do	page_tags=$((page_tags+1))
-			echo https://yande.re/tag.json?name=${tags}\&page\=$page_tags >> tags
-		done
-		aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
-		cat tag.*|
-		jq .|
-		grep name|
-		grep -i ${tags}|
-		sed -s 's\",\\g'|
-		sed -s 's\"\\g'|
-		sed -s s/name://g>> $temp1
-		rm tag*
-	else	wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|
-		jq .|
-		grep name|
-		grep -i ${tags}|
-		sed -s 's\",\\g'|
-		sed -s 's\"\\g'|
-		sed -s s/name://g>> $temp1
-		rm tag*
-	fi
-	echo Danbooru:>> $temp1
-	echo -e \\t暂不支持搜索>> $temp1
-	kdialog --textbox $temp1 450 675 2>/dev/null &
-	if kdialog --yesno 需要搜索下一个tag吗？ 2>/dev/null
-	then	search_tags
-	fi
-fi
 booru=`kdialog --menu 请选择图站 1 Danbooru 2 Konachan 3 Yande.re 2>/dev/null`
 case $booru in
 	1)
