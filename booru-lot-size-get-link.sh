@@ -8,6 +8,24 @@
 temp0=`mktemp -td dir.XXXXXXXX`
 cd $temp0
 
+function set_booru(){
+	booru=`kdialog --menu 请选择图站 1 Danbooru 2 Konachan 3 Yande.re 2>/dev/null`
+	if [ x$booru != x ]
+	then	case $booru in
+		1)
+		booru=danbooru.donmai.us/posts
+		;;
+		2)
+		booru=konachan.net/post
+		;;
+		3)
+		booru=yande.re/post
+		;;
+		esac
+	else set_booru
+	fi
+}
+
 function save_file(){
 	path=`kdialog --getsavefilename $HOME "*.txt" 2>/dev/null`
 	if [ x$path = x ]
@@ -102,18 +120,7 @@ function search_tags(){
 }
 
 search_tags
-booru=`kdialog --menu 请选择图站 1 Danbooru 2 Konachan 3 Yande.re 2>/dev/null`
-case $booru in
-	1)
-	booru=danbooru.donmai.us/posts
-	;;
-	2)
-	booru=konachan.net/post
-	;;
-	3)
-	booru=yande.re/post
-	;;
-esac
+set_booru
 tags=`kdialog --inputbox 请输入需要的tag（多tag请用“+”连接） 2>/dev/null`
 if [ $booru != danbooru.donmai.us/posts ]
 then 	wget https://$booru\?tags\=${tags} -o /dev/null -O - |
