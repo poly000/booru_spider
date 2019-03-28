@@ -70,7 +70,6 @@ function search_tags(){
 		else	wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|
 			jq .|
 			grep name|
-			grep -i ${tags}|
 			sed -s 's\",\\g'|
 			sed -s 's\"\\g'|
 			sed -s s/name://g>> $temp1
@@ -95,7 +94,6 @@ function search_tags(){
 			cat tag.*|
 			jq .|
 			grep name|
-			grep -i ${tags}|
 			sed -s 's\",\\g'|
 			sed -s 's\"\\g'|
 			sed -s s/name://g>> $temp1
