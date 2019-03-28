@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# v1.1.1
+# v1.2.0
 
 # Poly000
 # 可以爬取booru图链接为链接列表。
@@ -129,7 +129,9 @@ then 	wget https://$booru\?tags\=${tags} -o /dev/null -O - |
 	head -n 1|
 	sed -s 's\href="/post?page=\\g'>page
 	page_max=`kdialog --inputbox 请输入要下载多少页（默认为最大值） 2>/dev/null`
-	if [ 0$page_max = 0 ]
+	if ! [ 0 -lt `cat page` ]
+	then	 page_max=1
+	elif [ 0$page_max = 0 ]
 	then	 page_max=`cat page`
 	fi
 else 	echo page_max=`kdialog --inputbox 请输入要下载多少页（至多未知，也许120） 2>/dev/null`
