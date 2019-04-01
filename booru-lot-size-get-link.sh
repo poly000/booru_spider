@@ -27,7 +27,7 @@ function set_booru(){
 }
 
 function save_file(){
-	path=`kdialog --getsavefilename $HOME "*.txt" 2>/dev/null`
+	path="`kdialog --getsavefilename $HOME "*.txt" 2>/dev/null`"
 	if [ x${path} = x ]
 	then save_file
 	fi
@@ -150,5 +150,5 @@ grep \"file_url|
 sed -s 's/    "file_url": "//g'|
 sed -s 's/",//g'>$temp2
 save_file
-cp $temp2 ${path}
+cp $temp2 "${path}"
 rm -rf $temp0 $temp1 $temp2
