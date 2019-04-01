@@ -28,18 +28,18 @@ function set_booru(){
 
 function save_file(){
 	path=`kdialog --getsavefilename $HOME "*.txt" 2>/dev/null`
-	if [ x$path = x ]
+	if [ x${path} = x ]
 	then save_file
 	fi
 }
 
 function search_tags(){
 	if tags=`kdialog --inputbox 请输入搜索tag的关键词 2>/dev/null`
-	then if [ x = x$tags ]
+	then if [ x = x${tags} ]
 	     then search_tags
 	     fi
 	fi
-	if [ x != x$tags ]
+	if [ x != x${tags} ]
 	then
 		kdialog --msgbox 开始搜索... 2>/dev/null &
 		temp1=`mktemp -t temp.XXXXXXXX`
@@ -150,5 +150,5 @@ grep \"file_url|
 sed -s 's/    "file_url": "//g'|
 sed -s 's/",//g'>$temp2
 save_file
-cp $temp2 $path
+cp $temp2 ${path}
 rm -rf $temp0 $temp1 $temp2
