@@ -88,9 +88,7 @@ function search_tags(){
 			cat tag.*|
 			jq .|
 			grep name|
-			sed -s 's\",\\g'|
-			sed -s 's\"\\g'|
-			sed -s s/name://g>> $temp1
+			sed -s 's\",\\g ; s\"\\g ; s/name://g'>> $temp1
 			rm tag*
 		else	wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|
 			jq .|
