@@ -46,9 +46,7 @@ function search_tags(){
 		echo Konachan: > $temp1
 		wget https://konachan.net/tag?name=${tags} -o /dev/null -O -|
 		grep next_page|
-		sed -s 's/&amp;type=">/\n/g'|
-		sed -s 's/</\n/g'|
-		sed -s 's/">/\n/g'|    
+		sed -s 's/&amp;type=">/\n/g ; s/</\n/g ; s/">/\n/g'|    
 		sed -n 29p>tags
 		max_tags=`cat tags`
 		if [ x$max_tags != x ]
@@ -70,17 +68,13 @@ function search_tags(){
 		else	wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|
 			jq .|
 			grep name|
-			sed -s 's\",\\g'|
-			sed -s 's\"\\g'|
-			sed -s s/name://g>> $temp1
+			sed -s 's\",\\g ; s\"\\g ; s/name://g'>> $temp1
 			rm tag*
 		fi
 		echo Yande.re:>> $temp1
 		wget https://yande.re/tag?name=${tags} -o /dev/null -O -|
 		grep next_page|
-		sed -s 's/&amp;type=">/\n/g'|
-		sed -s 's/</\n/g'|
-		sed -s 's/">/\n/g'|    
+		sed -s 's/&amp;type=">/\n/g ; s/</\n/g ; s/">/\n/g'|
 		sed -n 29p>tags
 		max_tags=`cat tags`
 		if [ x$max_tags != x ]
@@ -101,10 +95,7 @@ function search_tags(){
 		else	wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|
 			jq .|
 			grep name|
-			grep -i ${tags}|
-			sed -s 's\",\\g'|
-			sed -s 's\"\\g'|
-			sed -s s/name://g>> $temp1
+			sed -s 's\",\\g ; s\"\\g ; s/name://g'>> $temp1
 			rm tag*
 		fi
 		echo Danbooru:>> $temp1
@@ -147,8 +138,7 @@ aria2c -i List #-j num #--http-proxy= --https-proxy= # -j：指定最高同时�
 cat ${booru#*/}*|
 jq .|
 grep \"file_url|
-sed -s 's/    "file_url": "//g'|
-sed -s 's/",//g'>$temp2
+sed -s 's/    "file_url": "//g ; s/",//g'>$temp2
 save_file
 cp $temp2 "${path}"
 rm -rf $temp0 $temp1 $temp2
