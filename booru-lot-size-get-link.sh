@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# v1.2.0
+# v1.2.1b1
 
 # Poly000
 # 可以爬取booru图链接为链接列表。
@@ -134,6 +134,10 @@ temp2=`mktemp -t temp.XXXXXXXX`
 kdialog --msgbox 开始获取... 2>/dev/null &
 aria2c -i List #-j num #--http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
 cat ${booru#*/}*|
+sed 's/{/\n{/g ; s/}]/}\n]/g'|
+# grep -v 'rating":"q' | #过滤露点分级图
+# grep -v 'rating":"e' | #过滤不健康分级图
+# grep -v 'rating":"s' | #过滤安全分级图
 jq .|
 grep \"file_url|
 sed -s 's/    "file_url": "//g ; s/",//g'>$temp2
