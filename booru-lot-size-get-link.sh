@@ -97,7 +97,11 @@ function search_tags(){
 			rm tag*
 		fi
 		echo Danbooru:>> $temp1
-		echo -e \\t暂不支持搜索>> $temp1
+		wget https://danbooru.donmai.us/tags.json\?search\[name_matches\]\=${tags} -o /dev/null -O -|
+		jq .|
+		grep name|
+		sed -s 's\",\\g ; s\"\\g ; s/name://g'>> $temp1
+		rm tag*
 		kdialog --textbox $temp1 450 675 2>/dev/null &
 		if kdialog --yesno 需要搜索下一个tag吗？ 2>/dev/null
 		then	tags=
