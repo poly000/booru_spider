@@ -1,13 +1,9 @@
 #!/bin/bash
-
 # v1.2.2
-
 # Poly000
 # 可以爬取booru图链接为链接列表。
-
 temp0=`mktemp -td dir.XXXXXXXX`
 cd $temp0
-
 function set_booru(){
 	booru=`kdialog --menu 请选择图站 1 Danbooru 2 Konachan 3 Yande.re 2>/dev/null`
 	if [ x$booru != x ]
@@ -25,14 +21,12 @@ function set_booru(){
 	else set_booru
 	fi
 }
-
 function save_file(){
 	path="`kdialog --getsavefilename $HOME "*.txt" 2>/dev/null`"
 	if [ x${path} = x ]
 	then save_file
 	fi
 }
-
 function search_tags(){
 	if tags=`kdialog --inputbox 请输入搜索tag的关键词 2>/dev/null`
 	then if [ x = x${tags} ]
@@ -109,7 +103,6 @@ function search_tags(){
 		fi
 	fi
 }
-
 search_tags
 set_booru
 tags=`kdialog --inputbox 请输入需要的tag（多tag请用“+”连接） 2>/dev/null`
