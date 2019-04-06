@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# v1.2.2b
+# v1.2.2
 
 # Poly000
 # 可以爬取booru图链接为链接列表。
@@ -97,9 +97,9 @@ function search_tags(){
 			rm tag*
 		fi
 		echo Danbooru:>> $temp1
-		wget https://danbooru.donmai.us/tags.json\?search\[name_matches\]\=${tags} -o /dev/null -O -|
+		wget 'https://danbooru.donmai.us/tags.json?commit=Search&search[hide_empty]=yes&search[name_matches]=*'${tags}'*&search[order]=date&utf8=%E2%9C%93' -o /dev/null -O -|
 		jq .|
-		grep name|
+		grep \"name|
 		sed -s 's\",\\g ; s\"\\g ; s/name://g'>> $temp1
 		rm tag*
 		kdialog --textbox $temp1 450 675 2>/dev/null &
