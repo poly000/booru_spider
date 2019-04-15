@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Poly000
-#1.0.5b_01
+#1.0.5b
 
 a()
 {
@@ -34,7 +34,7 @@ sed -s s/name://g|
 more
 echo
 echo Danbooru:
-wget https://danbooru.donmai.us/tags.json\?search\[name_matches\]\=${tags} -o /dev/null -O -|
+wget https://danbooru.donmai.us/tags.json?name=${tags} -o /dev/null -O -|
 jq .|
 grep -i ${tags}|
 sed -s 's\",\\g'|
