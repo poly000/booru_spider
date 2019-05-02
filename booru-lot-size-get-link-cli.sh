@@ -23,7 +23,7 @@ echo Yande.re:
 wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|jq .|grep -i ${tags}|sed -s 's\",\\g;s\"\\g;s/name://g'|more
 echo
 echo Danbooru:
-wget https://danbooru.donmai.us/tags.json?name=${tags} -o /dev/null -O -|jq .|grep -i ${tags}|sed -s 's\",\\g;s\"\\g;s/name://g'|more
+wget 'https://danbooru.donmai.us/tags.json?commit=Search&search[hide_empty]=yes&search[name_matches]=*'${tags}'*&search[order]=date&utf8=%E2%9C%93' -o /dev/null -O -|jq .|grep \"name|sed -s 's\",\\g ; s\"\\g ; s/name://g'
 echo 需要搜索下一个tag吗？（多tag请用“+”连接）（y/*）
 read -s -n 1 again
 case $again in
