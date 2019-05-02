@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Poly000
-#1.0.5b
+# CLI-1.1
 
 a()
 {
@@ -17,30 +17,13 @@ fi
 b()
 {
 echo Konachan:
-wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|
-jq .|
-grep -i ${tags}|
-sed -s 's\",\\g'|
-sed -s 's\"\\g'|
-sed -s s/name://g|
-more
+wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|jq .|grep -i ${tags}|sed -s 's\",\\g;s\"\\g;s/name://g'|more
 echo
 echo Yande.re:
-wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|
-jq .|grep -i ${tags}|
-sed -s 's\",\\g'|
-sed -s 's\"\\g'|
-sed -s s/name://g|
-more
+wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|jq .|grep -i ${tags}|sed -s 's\",\\g;s\"\\g;s/name://g'|more
 echo
 echo Danbooru:
-wget https://danbooru.donmai.us/tags.json?name=${tags} -o /dev/null -O -|
-jq .|
-grep -i ${tags}|
-sed -s 's\",\\g'|
-sed 's\"\\g'|
-sed -s s/name://g|
-more
+wget https://danbooru.donmai.us/tags.json?name=${tags} -o /dev/null -O -|jq .|grep -i ${tags}|sed -s 's\",\\g;s\"\\g;s/name://g'|more
 echo 需要搜索下一个tag吗？（多tag请用“+”连接）（y/*）
 read -s -n 1 again
 case $again in
@@ -77,13 +60,12 @@ case $page in
 wget https://$booru.json?tags=${tags}\&page=1 -o /dev/null -O -|
 jq .|
 grep \"file_url|
-sed -s 's/    "file_url": "//g'|
-sed -s 's/",//g'|
-dd of=link-list
+sed -s 's/    "file_url": "//g;s/",//g'>link-list
 ;;
 [Aa])
 path=`pwd`
-cd `mktemp -td dir.XXXXXXXX`
+tempdir=`mktemp -td dir.XXXXXXXX`
+cd $tempdir
 if [ $booru != danbooru.donmai.us/posts ]
 then wget https://$booru\?tags\=${tags} -o /dev/null -O - |
 sed -s 's/ /\n/g'|
@@ -108,7 +90,7 @@ aria2c -i List #-j num #--http-proxy= --https-proxy= # -j：指定最高同时�
 cat ${booru#*/}*|
 jq .|
 grep \"file_url|
-sed -s 's/    "file_url": "//g'|
-sed -s 's/",//g'>$path/link-list
+sed -s 's/    "file_url": "//g;s/",//g'>$path/link-list
 ;;
 esac
+rm -rf $tempdir
