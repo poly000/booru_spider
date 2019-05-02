@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Poly000
-# CLI-1.1
+# CLI-1.2
 
 a()
 {
@@ -68,12 +68,7 @@ tempdir=`mktemp -td dir.XXXXXXXX`
 cd $tempdir
 if [ $booru != danbooru.donmai.us/posts ]
 then wget https://$booru\?tags\=${tags} -o /dev/null -O - |
-sed -s 's/ /\n/g'|
-grep href|
-tail -n 12|
-sed -s 's/&amp;/\n/g'|
-head -n 1|
-sed -s 's\href="/post?page=\\g'>page
+sed -s 's/ /\n/g'|grep href|tail -n 12|sed -s 's/&amp;/\n/g'|head -n 1|sed -s 's\href="/post?page=\\g'>page
 echo 请输入要下载多少页（默认`cat page`）
 read page_max
   if [ 0$page_max = 0 ]
@@ -87,10 +82,11 @@ do page=$((page+1))
 	echo https://$booru.json?tags=${tags}\&page=$page >> List
 done
 aria2c -i List #-j num #--http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
-cat ${booru#*/}*|
-jq .|
-grep \"file_url|
-sed -s 's/    "file_url": "//g;s/",//g'>$path/link-list
+cat ${booru#*/}*|sed 's/{/\n{/g ; s/}]/}\n]/g'|
+# grep -v 'rating":"q' | #排除露点分级图
+# grep -v 'rating":"e' | #排除色情分级图
+# grep -v 'rating":"s' | #排除安全分级图
+jq .|grep \"file_url|sed -s 's/    "file_url": "//g;s/",//g'>$path/link-list
 ;;
 esac
 rm -rf $tempdir
