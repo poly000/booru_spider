@@ -97,14 +97,14 @@ path=`pwd`
 tempdir=`mktemp -td dir.XXXXXXXX`
 cd $tempdir
 if [ $booru != danbooru.donmai.us/posts ]
-then wget https://$booru\?tags\=${tags} -o /dev/null -O - |
-sed -s 's/ /\n/g'|grep href|tail -n 12|sed -s 's/&amp;/\n/g'|head -n 1|sed -s 's\href="/post?page=\\g'>page
+then wget https://$booru\?tags\=${tags} -o /dev/null -O - |sed -s 's/ /\n/g'|grep href|tail -n 12|sed -s 's/&amp;/\n/g'|head -n 1|sed -s 's\href="/post?page=\\g'>page
 echo 请输入要下载多少页（默认`cat page`）
 read page_max
   if [ 0$page_max = 0 ]
   then page_max=`cat page`
   fi
 else echo 请输入要下载多少页（理论最多1000page）
+	read page_max
 fi
 page=0
 while [ $page -lt $page_max ]

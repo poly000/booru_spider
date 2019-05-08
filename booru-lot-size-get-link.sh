@@ -90,7 +90,7 @@ then 	wget https://$booru\?tags\=${tags} -o /dev/null -O - |sed -s 's/ /\n/g'|gr
 	elif [ 0$page_max = 0 ]
 	then	 page_max=`cat page`
 	fi
-else 	echo page_max=`kdialog --inputbox 请输入要下载多少页（至多未知，也许120） 2>/dev/null`
+else 	page_max=`kdialog --inputbox 请输入要下载多少页（至多未知，也许120） 2>/dev/null`
 fi
 page=0
 while [ $page -lt $page_max ]
