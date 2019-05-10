@@ -48,9 +48,9 @@ function search_tags(){
 				echo https://konachan.net/tag.json?name=${tags}\&page\=$page_tags >> tags
 			done
 			aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
-			cat tag.*|jq .|grep name|grep -i ${tags}|sed -s 's\",\\g'|sed -s 's\"\\g'|sed -s s/name://g>> $temp1
+			cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'>> $temp1
 			rm tag*
-		else	wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|jq .|grep name|sed -s 's\",\\g ; s\"\\g ; s/name://g'>> $temp1
+		else	wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'>> $temp1
 			rm tag*
 		fi
 		echo Yande.re:>> $temp1
@@ -64,13 +64,13 @@ function search_tags(){
 				echo https://yande.re/tag.json?name=${tags}\&page\=$page_tags >> tags
 			done
 			aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
-			cat tag.*|jq .|grep name|sed -s 's\",\\g ; s\"\\g ; s/name://g'>> $temp1
+			cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'>> $temp1
 			rm tag*
-		else	wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|jq .|grep name|sed -s 's\",\\g ; s\"\\g ; s/name://g'>> $temp1
+		else	wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'>> $temp1
 			rm tag*
 		fi
 		echo Danbooru:>> $temp1
-		wget 'https://danbooru.donmai.us/tags.json?commit=Search&search[hide_empty]=yes&search[name_matches]=*'${tags}'*&search[order]=date&utf8=%E2%9C%93' -o /dev/null -O -|jq .|grep \"name|sed -s 's\",\\g ; s\"\\g ; s/name://g'>> $temp1
+		wget 'https://danbooru.donmai.us/tags.json?commit=Search&search[hide_empty]=yes&search[name_matches]=*'${tags}'*&search[order]=date&utf8=%E2%9C%93' -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'>> $temp1
 		rm tag*
 		kdialog --textbox $temp1 450 675 2>/dev/null &
 		if kdialog --yesno 需要搜索下一个tag吗？ 2>/dev/null
