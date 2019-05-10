@@ -104,7 +104,7 @@ cat ${booru#*/}*|sed 's/{/\n{/g ; s/}]/}\n]/g'|
 # grep -v 'rating":"q' | #排除露点分级图
 # grep -v 'rating":"e' | #排除色情分级图
 # grep -v 'rating":"s' | #排除安全分级图
-jq .|grep \"file_url|sed -s 's/    "file_url": "//g ; s/",//g'>$temp2
+sed 's/,/\n/g'|grep \"file_url|sed 's/"file_url":"//g;s/"//g'>$temp2
 save_file
 cp $temp2 "${path}"
 rm -rf $temp0 $temp1 $temp2
