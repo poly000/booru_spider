@@ -30,9 +30,9 @@ then	page_tags=0
 		echo https://konachan.net/tag.json?name=${tags}\&page\=$page_tags >> tags
 	done
 	aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
-	cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'|more
+	cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
 	rm tag*
-else	curl https://konachan.net/tag.json?name=${tags} 2>/dev/null|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'|more
+else	curl https://konachan.net/tag.json?name=${tags} 2>/dev/null|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
 	rm tag*
 fi
 echo Yande.re:
@@ -46,9 +46,9 @@ if [ x$max_tags != x ]
 		echo https://yande.re/tag.json?name=${tags}\&page\=$page_tags >> tags
 	done
 	aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
-	cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'|more
+	cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
 	rm tag*
-else	curl https://yande.re/tag.json?name=${tags} 2>/dev/null|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'|more
+else	curl https://yande.re/tag.json?name=${tags} 2>/dev/null|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
 	rm tag*
 fi
 echo Danbooru:
