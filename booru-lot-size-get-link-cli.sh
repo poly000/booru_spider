@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Poly000
-# CLI-1.2
+# CLI-1.3
 
 a()
 {
@@ -81,18 +81,6 @@ echo 请输入欲保存的文件名
 while [ x$outfile = x ]
 do read outfile
 done
-echo 需要下载？
-echo o 仅第一页，即最新
-echo a 所有页数
-read -s -n 1 page
-case $page in
-[Oo])
-wget https://$booru.json?tags=${tags}\&page=1 -o /dev/null -O -|
-jq .|
-grep \"file_url|
-sed -s 's/    "file_url": "//g;s/",//g'>"$outfile"
-;;
-[Aa])
 path=`pwd`
 tempdir=`mktemp -td dir.XXXXXXXX`
 cd $tempdir
@@ -116,7 +104,5 @@ cat ${booru#*/}*|sed 's/{/\n{/g ; s/}]/}\n]/g'|
 # grep -v 'rating":"q' | #排除露点分级图
 # grep -v 'rating":"e' | #排除色情分级图
 # grep -v 'rating":"s' | #排除安全分级图
-jq .|grep \"file_url|sed -s 's/    "file_url": "//g;s/",//g'>$path/"$outfile"
-;;
-esac
+sed 's/,/\n/g'|grep \"file_url|sed 's/"file_url":"//g;s/"//g'>$path/"$outfile"
 rm -rf $tempdir
