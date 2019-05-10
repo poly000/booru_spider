@@ -3,6 +3,9 @@
 # Poly000
 # CLI-1.3
 
+path=`pwd`
+tempdir=`mktemp -td dir.XXXXXXXX`
+cd $tempdir
 a()
 {
 echo 请输入搜索tag的关键词\(输入n跳过搜索\)
@@ -81,9 +84,6 @@ echo 请输入欲保存的文件名
 while [ x$outfile = x ]
 do read outfile
 done
-path=`pwd`
-tempdir=`mktemp -td dir.XXXXXXXX`
-cd $tempdir
 if [ $booru != danbooru.donmai.us/posts ]
 then curl https://$booru\?tags\=${tags} 2>/dev/null|sed -s 's/ /\n/g'|grep href|tail -n 12|sed -s 's/&amp;/\n/g'|head -n 1|sed -s 's\href="/post?page=\\g'>page
 echo 请输入要下载多少页（默认`cat page`）
