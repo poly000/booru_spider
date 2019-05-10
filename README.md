@@ -1,14 +1,24 @@
 # booru_spider
-需要包 `aria2`  `jq`  `kdialog`
+需要包 `aria2` `kdialog`
 
-这是一个Booru爬取脚本。<del>这是一个假项目。</del>
+CLI需要包 `aria2`
 
-支持图站: Konachan, Danbooru, Yande.re,  <del>Gelbooru</del>
+<br>
+
+这是一个Booru爬取脚本。
+
+支持图站: Konachan, Danbooru, Yande.re
 
 <br>
 
 # CLI版本更新历史
 
+* CLI-1.3
+ 
+ 不再需要jq 
+ 
+ <b>（使用 [Git for Windows](https://git-scm.com/download/win) 以及配置好 [aria2](https://github.com/aria2/aria2/releases) 就可以在windows使用脚本了）</b>
+ 
 * CLI-1.2
 
  去掉一些换行
@@ -30,6 +40,10 @@
 
 # 更新历史
 
+* v1.3.0
+ 
+ 不再需要jq
+ 
 * v1.2.2
 
  添加danbooru搜索标签
