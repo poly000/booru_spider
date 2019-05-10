@@ -1,5 +1,5 @@
 #!/bin/bash
-# v1.2.2
+# v1.3.0
 # Poly000
 # 可以爬取booru图链接为链接列表。
 temp0=`mktemp -td dir.XXXXXXXX`
