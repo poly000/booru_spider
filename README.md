@@ -48,9 +48,9 @@ CLI需要包 `aria2` `curl`
 
 * v1.3.1
 
-  微调输出
+ 微调输出
  
-  修复Danbooru tag搜索
+ 修复Danbooru tag搜索
  
 * v1.3.0
  
