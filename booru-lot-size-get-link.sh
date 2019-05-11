@@ -74,7 +74,6 @@ function search_tags(){
 		echo >&3
 		echo Danbooru: >&3
 		wget 'https://danbooru.donmai.us/tags.json?commit=Search&search[hide_empty]=yes&search[name_matches]=*'${tags}'*&search[order]=date&utf8=%E2%9C%93' -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
-		wget 'https://danbooru.donmai.us/tags.json?commit=Search&search[hide_empty]=yes&search[name_matches]='${tags}'&search[order]=date&utf8=%E2%9C%93' -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
 		rm tag*
 		kdialog --textbox $temp1 450 675 2>/dev/null &
 		if kdialog --yesno 需要搜索下一个tag吗？ 2>/dev/null
