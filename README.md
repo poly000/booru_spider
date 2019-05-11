@@ -9,8 +9,6 @@ CLI需要包 `aria2` `curl`
 
 支持图站: Konachan, Danbooru, Yande.re
 
-<br>
-
 [CLI版本更新历史](#cli版本更新历史)
 
 # 更新历史
