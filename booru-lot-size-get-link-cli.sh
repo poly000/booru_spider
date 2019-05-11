@@ -52,7 +52,7 @@ else	curl https://yande.re/tag.json?name=${tags} 2>/dev/null|sed 's/,/\n/g'|grep
 	rm tag*
 fi
 echo Danbooru:
-curl 'https://danbooru.donmai.us/tags.json?commit=Search&search[hide_empty]=yes&search[name_matches]=*'${tags}'*&search[order]=date&utf8=%E2%9C%93' 2>/dev/null|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
+curl 'https://danbooru.donmai.us/tags.json?commit=Search&search\[hide_empty\]=yes&search\[name_matches\]=*'${tags}'*&search\[order\]=date&utf8=%E2%9C%93' 2>/dev/null|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
 echo 需要搜索下一个tag吗？（多tag请用“+”连接）（y/*）
 read -s -n 1 again
 case $again in
