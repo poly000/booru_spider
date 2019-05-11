@@ -13,6 +13,12 @@ CLI需要包 `aria2` `curl`
 
 # CLI版本更新历史
 
+* CLI-1.3.1
+
+ 微调输出
+ 
+ 修复Danbooru tag搜索
+ 
 * CLI-1.3
  
  不再需要jq 
@@ -40,6 +46,12 @@ CLI需要包 `aria2` `curl`
 
 # 更新历史
 
+* v1.3.1
+
+  微调输出
+ 
+  修复Danbooru tag搜索
+ 
 * v1.3.0
  
  不再需要jq
