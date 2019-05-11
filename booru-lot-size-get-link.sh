@@ -1,5 +1,5 @@
 #!/bin/bash
-# v1.3.0
+# v1.3.1
 # Poly000
 # 可以爬取booru图链接为链接列表。
 temp0=`mktemp -td dir.XXXXXXXX`
@@ -37,7 +37,8 @@ function search_tags(){
 	then
 		kdialog --msgbox 开始搜索... 2>/dev/null &
 		temp1=`mktemp -t temp.XXXXXXXX`
-		echo Konachan: > $temp1
+		exec 3> $temp1
+		echo Konachan: >&3
 		wget https://konachan.net/tag?name=${tags} -o /dev/null -O -|grep next_page|sed -s 's/&amp;type=">/\n/g ; s/</\n/g ; s/">/\n/g'|sed -n 29p>tags
 		max_tags=`cat tags`
 		if [ x$max_tags != x ]
@@ -48,12 +49,12 @@ function search_tags(){
 				echo https://konachan.net/tag.json?name=${tags}\&page\=$page_tags >> tags
 			done
 			aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
-			cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'>> $temp1
+			cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
 			rm tag*
-		else	wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'>> $temp1
+		else	wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
 			rm tag*
 		fi
-		echo Yande.re:>> $temp1
+		echo Yande.re: >&3
 		wget https://yande.re/tag?name=${tags} -o /dev/null -O -|grep next_page|sed -s 's/&amp;type=">/\n/g ; s/</\n/g ; s/">/\n/g'|sed -n 29p>tags
 		max_tags=`cat tags`
 		if [ x$max_tags != x ]
@@ -64,13 +65,14 @@ function search_tags(){
 				echo https://yande.re/tag.json?name=${tags}\&page\=$page_tags >> tags
 			done
 			aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
-			cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'>> $temp1
+			cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
 			rm tag*
-		else	wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'>> $temp1
+		else	wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
 			rm tag*
 		fi
-		echo Danbooru:>> $temp1
-		wget 'https://danbooru.donmai.us/tags.json?commit=Search&search[hide_empty]=yes&search[name_matches]=*'${tags}'*&search[order]=date&utf8=%E2%9C%93' -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'>> $temp1
+		echo Danbooru: >&3
+		wget 'https://danbooru.donmai.us/tags.json?commit=Search&search[hide_empty]=yes&search[name_matches]=*'${tags}'*&search[order]=date&utf8=%E2%9C%93' -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
+		wget 'https://danbooru.donmai.us/tags.json?commit=Search&search[hide_empty]=yes&search[name_matches]='${tags}'&search[order]=date&utf8=%E2%9C%93' -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
 		rm tag*
 		kdialog --textbox $temp1 450 675 2>/dev/null &
 		if kdialog --yesno 需要搜索下一个tag吗？ 2>/dev/null
