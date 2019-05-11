@@ -11,38 +11,7 @@ CLI需要包 `aria2` `curl`
 
 <br>
 
-# CLI版本更新历史
-
-* CLI-1.3.1
-
- 微调输出
- 
- 修复Danbooru tag搜索
- 
-* CLI-1.3
- 
- 不再需要jq 
- 
- <b>（使用 [Git for Windows](https://git-scm.com/download/win) 以及配置好 [aria2](https://github.com/aria2/aria2/releases) 就可以在windows使用脚本了）</b>
- 
-* CLI-1.2
-
- 去掉一些换行
- 
- 添加分级过滤功能
- 
- 修复Danbooru tag搜索
- 
- Konachan,Yande.re tag搜索支持多分页
- 
- 输出文件可以设定文件名
-
-* v1.0.5b > CLI-1.1
-
- 去掉一些换行
-
- 合并部分sed语句
-
+[CLI版本更新历史](#cli版本更新历史)
 
 # 更新历史
 
@@ -113,3 +82,36 @@ CLI需要包 `aria2` `curl`
 * v1.0.0
 
  实现搜索标签
+
+# CLI版本更新历史
+
+* CLI-1.3.1
+
+ 微调输出
+ 
+ 修复Danbooru tag搜索
+ 
+* CLI-1.3
+ 
+ 不再需要jq 
+ 
+ <b>（使用 [Git for Windows](https://git-scm.com/download/win) 以及配置好 [aria2](https://github.com/aria2/aria2/releases) 就可以在windows使用脚本了）</b>
+ 
+* CLI-1.2
+
+ 去掉一些换行
+ 
+ 添加分级过滤功能
+ 
+ 修复Danbooru tag搜索
+ 
+ Konachan,Yande.re tag搜索支持多分页
+ 
+ 输出文件可以设定文件名
+
+* v1.0.5b > CLI-1.1
+
+ 去掉一些换行
+
+ 合并部分sed语句
+
