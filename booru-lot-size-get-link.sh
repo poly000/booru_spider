@@ -54,6 +54,7 @@ function search_tags(){
 		else	wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
 			rm tag*
 		fi
+		echo >&3
 		echo Yande.re: >&3
 		wget https://yande.re/tag?name=${tags} -o /dev/null -O -|grep next_page|sed -s 's/&amp;type=">/\n/g ; s/</\n/g ; s/">/\n/g'|sed -n 29p>tags
 		max_tags=`cat tags`
@@ -70,6 +71,7 @@ function search_tags(){
 		else	wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
 			rm tag*
 		fi
+		echo >&3
 		echo Danbooru: >&3
 		wget 'https://danbooru.donmai.us/tags.json?commit=Search&search[hide_empty]=yes&search[name_matches]=*'${tags}'*&search[order]=date&utf8=%E2%9C%93' -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
 		wget 'https://danbooru.donmai.us/tags.json?commit=Search&search[hide_empty]=yes&search[name_matches]='${tags}'&search[order]=date&utf8=%E2%9C%93' -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
