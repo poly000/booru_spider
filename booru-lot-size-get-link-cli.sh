@@ -35,6 +35,7 @@ then	page_tags=0
 else	curl https://konachan.net/tag.json?name=${tags} 2>/dev/null|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
 	rm tag*
 fi
+echo
 echo Yande.re:
 curl https://yande.re/tag?name=${tags} 2>/dev/null|grep next_page|sed -s 's/&amp;type=">/\n/g ; s/</\n/g ; s/">/\n/g'|sed -n 29p>tags
 max_tags=`cat tags`
@@ -51,8 +52,10 @@ if [ x$max_tags != x ]
 else	curl https://yande.re/tag.json?name=${tags} 2>/dev/null|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
 	rm tag*
 fi
+echo
 echo Danbooru:
 curl 'https://danbooru.donmai.us/tags.json?commit=Search&search\[hide_empty\]=yes&search\[name_matches\]=*'${tags}'*&search\[order\]=date&utf8=%E2%9C%93' 2>/dev/null|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
+curl 'https://danbooru.donmai.us/tags.json?commit=Search&search\[hide_empty\]=yes&search\[name_matches\]='${tags}'&search\[order\]=date&utf8=%E2%9C%93' 2>/dev/null|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
 echo 需要搜索下一个tag吗？（多tag请用“+”连接）（y/*）
 read -s -n 1 again
 case $again in
