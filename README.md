@@ -9,6 +9,8 @@ CLI需要包 `aria2` `curl`
 
 支持图站: Konachan, Danbooru, Yande.re
 
+可以过滤分级（排除过滤）
+
 [CLI版本更新历史](#cli版本更新历史)
 
 # 更新历史
