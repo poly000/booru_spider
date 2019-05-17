@@ -2,7 +2,8 @@
 
 # Poly000
 # CLI-1.3.1
-
+http_proxy=
+https_proxy=
 path=`pwd`
 tempdir=`mktemp -td dir.XXXXXXXX`
 cd $tempdir
@@ -29,7 +30,7 @@ then	page_tags=0
 	do	page_tags=$((page_tags+1))
 		echo https://konachan.net/tag.json?name=${tags}\&page\=$page_tags >> tags
 	done
-	aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：Set maximum number of parallel downloads for  \(1～n，default 5\)
+	aria2c -i tags # -j num --http-proxy=$http_proxy --https-proxy=$https_proxy # -j：Set maximum number of parallel downloads for  \(1～n，default 5\)
 	cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
 	rm tag*
 else	curl https://konachan.net/tag.json?name=${tags} 2>/dev/null|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
@@ -46,7 +47,7 @@ if [ x$max_tags != x ]
 	do	page_tags=$((page_tags+1))
 		echo https://yande.re/tag.json?name=${tags}\&page\=$page_tags >> tags
 	done
-	aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：Set maximum number of parallel downloads for  \(1～n，default 5\)
+	aria2c -i tags # -j num --http-proxy=$http_proxy --https-proxy=$https_proxy # -j：Set maximum number of parallel downloads for  \(1～n，default 5\)
 	cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
 	rm tag*
 else	curl https://yande.re/tag.json?name=${tags} 2>/dev/null|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
@@ -98,7 +99,7 @@ while [ $page -lt $page_max ]
 do page=$((page+1))
 	echo https://$booru.json?tags=${tags}\&page=$page >> List
 done
-aria2c -i List #-j num #--http-proxy= --https-proxy= # -j：Set maximum number of parallel downloads for  \(1～n，default 5\)
+aria2c -i List #-j num #--http-proxy=$http_proxy --https-proxy=$https_proxy # -j：Set maximum number of parallel downloads for  \(1～n，default 5\)
 cat ${booru#*/}*|sed 's/{/\n{/g ; s/}]/}\n]/g'|
 # grep -v 'rating":"q' | #exclude Questionable
 # grep -v 'rating":"e' | #exclude Explicit
