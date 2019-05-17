@@ -2,6 +2,8 @@
 # v1.3.1
 # Poly000
 # able to get booru pics link as a link list text file.
+http_proxy=
+https_proxy=
 temp0=`mktemp -td dir.XXXXXXXX`
 cd $temp0
 function set_booru(){
@@ -48,7 +50,7 @@ function search_tags(){
 			do	page_tags=$((page_tags+1))
 				echo https://konachan.net/tag.json?name=${tags}\&page\=$page_tags >> tags
 			done
-			aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：Set maximum number of parallel downloads for  \(1～n，default 5\)
+			aria2c -i tags # -j num --http-proxy=$http_proxy --https-proxy=$https_proxy # -j：Set maximum number of parallel downloads for  \(1～n，default 5\)
 			cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
 			rm tag*
 		else	wget https://konachan.net/tag.json?name=${tags} -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
@@ -65,7 +67,7 @@ function search_tags(){
 			do	page_tags=$((page_tags+1))
 				echo https://yande.re/tag.json?name=${tags}\&page\=$page_tags >> tags
 			done
-			aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：Set maximum number of parallel downloads for  \(1～n，default 5\)
+			aria2c -i tags # -j num --http-proxy=$http_proxy --https-proxy=$https_proxy # -j：Set maximum number of parallel downloads for  \(1～n，default 5\)
 			cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
 			rm tag*
 		else	wget https://yande.re/tag.json?name=${tags} -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
@@ -101,8 +103,8 @@ do 	page=$((page+1))
 	echo https://$booru.json?tags=${tags}\&page=$page >> List
 done
 temp2=`mktemp -t temp.XXXXXXXX`
-kdialog --msgbox 开始获取... 2>/dev/null &
-aria2c -i List #-j num #--http-proxy= --https-proxy= # -j：Set maximum number of parallel downloads for  \(1～n，default 5\)
+kdialog --msgbox started to get... 2>/dev/null &
+aria2c -i List #-j num #--http-proxy=$http_proxy --https-proxy=$https_proxy # -j：Set maximum number of parallel downloads for  \(1～n，default 5\)
 cat ${booru#*/}*|sed 's/{/\n{/g ; s/}]/}\n]/g'|
 # grep -v 'rating":"q' | #exclude Questionable
 # grep -v 'rating":"e' | #exclude Explicit
