@@ -2,7 +2,9 @@
 
 # Poly000
 # CLI-1.3.1
-
+# 可以爬取booru图链接为链接列表。
+http_proxy=
+https_proxy=
 path=`pwd`
 tempdir=`mktemp -td dir.XXXXXXXX`
 cd $tempdir
@@ -29,7 +31,7 @@ then	page_tags=0
 	do	page_tags=$((page_tags+1))
 		echo https://konachan.net/tag.json?name=${tags}\&page\=$page_tags >> tags
 	done
-	aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
+	aria2c -i tags #-j num #--http-proxy=$http_proxy --https-proxy=$https_proxy # -j：指定最高同时下载文件数量 （1～n，默认5）
 	cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
 	rm tag*
 else	curl https://konachan.net/tag.json?name=${tags} 2>/dev/null|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
@@ -46,7 +48,7 @@ if [ x$max_tags != x ]
 	do	page_tags=$((page_tags+1))
 		echo https://yande.re/tag.json?name=${tags}\&page\=$page_tags >> tags
 	done
-	aria2c -i tags # -j num --http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
+	aria2c -i tags #-j num #--http-proxy=$http_proxy --https-proxy=$https_proxy # -j：指定最高同时下载文件数量 （1～n，默认5）
 	cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
 	rm tag*
 else	curl https://yande.re/tag.json?name=${tags} 2>/dev/null|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g'
@@ -101,7 +103,7 @@ while [ $page -lt $page_max ]
 do page=$((page+1))
 	echo https://$booru.json?tags=${tags}\&page=$page >> List
 done
-aria2c -i List #-j num #--http-proxy= --https-proxy= # -j：指定最高同时下载文件数量 （1～n，默认5）
+aria2c -i List #-j num #--http-proxy=$http_proxy --https-proxy=$https_proxy # -j：指定最高同时下载文件数量 （1～n，默认5）
 cat ${booru#*/}*|sed 's/{/\n{/g ; s/}]/}\n]/g'|
 # grep -v 'rating":"q' | #排除露点分级图
 # grep -v 'rating":"e' | #排除色情分级图
