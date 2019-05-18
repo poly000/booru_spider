@@ -1,5 +1,5 @@
 #!/bin/bash
-# v1.3.1
+# v1.3.2
 # Poly000
 # 可以爬取booru图链接为链接列表。
 http_proxy=
@@ -88,19 +88,17 @@ search_tags
 set_booru
 tags=`kdialog --inputbox 请输入需要的tag（多tag请用“+”连接） 2>/dev/null`
 if [ $booru != danbooru.donmai.us/posts ]
-then 	wget https://$booru\?tags\=${tags} -o /dev/null -O - |sed -s 's/ /\n/g'|grep href|tail -n 12|sed -s 's/&amp;/\n/g'|head -n 1|sed -s 's\href="/post?page=\\g'>page
-	page_max=`kdialog --inputbox 请输入要下载多少页（默认为最大值） 2>/dev/null`
+then 	wget https://$booru\?tags\=${tags}\&limit\=1000 -o /dev/null -O - |sed -n 23p|sed 's/page=/\n/g;s/&amp;/\n/g'|sed -n 3p>page
 	if ! [ 0 -lt `cat page` ]
 	then	 page_max=1
-	elif [ 0$page_max = 0 ]
-	then	 page_max=`cat page`
+	else	 page_max=`cat page`
 	fi
-else 	page_max=`kdialog --inputbox 请输入要下载多少页（至多未知，也许120） 2>/dev/null`
+else 	page_max=`kdialog --inputbox 请输入要下载多少页（理论最多1000page） 2>/dev/null`
 fi
 page=0
 while [ $page -lt $page_max ]
 do 	page=$((page+1))
-	echo https://$booru.json?tags=${tags}\&page=$page >> List
+	echo https://$booru.json?tags=${tags}\&page=$page\&limit\=1000 >> List
 done
 temp2=`mktemp -t temp.XXXXXXXX`
 kdialog --msgbox 开始获取... 2>/dev/null &

@@ -1,5 +1,5 @@
 #!/bin/bash
-# v1.3.1
+# v1.3.2
 # Poly000
 # able to get booru pics link as a link list text file.
 http_proxy=
@@ -88,19 +88,17 @@ search_tags
 set_booru
 tags=`kdialog --inputbox Please\ type\ the\ tags\ you\ wish\ \(use\ +\ connect\ tags\) 2>/dev/null`
 if [ $booru != danbooru.donmai.us/posts ]
-then 	wget https://$booru\?tags\=${tags} -o /dev/null -O - |sed -s 's/ /\n/g'|grep href|tail -n 12|sed -s 's/&amp;/\n/g'|head -n 1|sed -s 's\href="/post?page=\\g'>page
-	page_max=`kdialog --inputbox 'Please type how many pages you wish get (Default: max)' 2>/dev/null`
-	if ! [ 0 -lt `cat page` ]
-	then	 page_max=1
-	elif [ 0$page_max = 0 ]
-	then	 page_max=`cat page`
-	fi
+then 	wget https://$booru\?tags\=${tags}\&limit=1000 -o /dev/null -O - |sed -n 23p|sed 's/page=/\n/g;s/&amp;/\n/g'|sed -n 3p>page
+        if ! [ 0 -lt `cat page` ]
+        then	 page_max=1
+        else	 page_max=`cat page`
+        fi
 else 	page_max=`kdialog --inputbox 'Please type how many pages you wish get (Max: 1000 or others)' 2>/dev/null`
 fi
 page=0
 while [ $page -lt $page_max ]
 do 	page=$((page+1))
-	echo https://$booru.json?tags=${tags}\&page=$page >> List
+	echo https://$booru.json?tags=${tags}\&page=$page\&limit=1000 >> List
 done
 temp2=`mktemp -t temp.XXXXXXXX`
 kdialog --msgbox started to get... 2>/dev/null &

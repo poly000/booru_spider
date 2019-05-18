@@ -15,6 +15,12 @@ CLI需要包 `aria2` `curl`
 
 # 更新历史
 
+* v1.3.2
+ 
+ 去除konachan,yande.re手动输入获取page数功能
+
+ 获取提速
+
 * v1.3.1
 
  微调输出
@@ -85,6 +91,14 @@ CLI需要包 `aria2` `curl`
 
 # CLI版本更新历史
 
+* CLI-1.3.2
+ 
+ 修复tags结果单页或无出错
+
+ 去除konachan,yande.re手动输入获取page数功能
+
+ 获取提速
+
 * CLI-1.3.1
 
  微调输出
@@ -115,3 +129,4 @@ CLI需要包 `aria2` `curl`
 
  合并部分sed语句
 
+ kdialog改用read

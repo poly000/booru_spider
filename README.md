@@ -19,6 +19,12 @@ able to filter: Questionable|Explicit|Safe
 
 # Update History
 
+* v1.3.2
+
+ no more able to custom how many pages will get (konachan, yande.re)
+
+ faster to get
+
 * v1.3.1
 
  edited output
@@ -93,6 +99,14 @@ able to filter: Questionable|Explicit|Safe
 
 # cliverhistory
 
+* CLI-1.3.2
+
+ fixed tags no result or one page only then error
+
+ no more able to custom how many pages will get (konachan, yande.re)
+
+ faster to get
+
 * CLI-1.3.1
 
  edited output
@@ -120,3 +134,5 @@ able to filter: Questionable|Explicit|Safe
  deleted some '\n'
 
  some changes
+
+ kdialog to read

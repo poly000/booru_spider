@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Poly000
-# CLI-1.3.1
+# CLI-1.3.2
 # 可以爬取booru图链接为链接列表。
 http_proxy=
 https_proxy=
@@ -89,19 +89,18 @@ while [ x$outfile = x ]
 do read outfile
 done
 if [ $booru != danbooru.donmai.us/posts ]
-then curl https://$booru\?tags\=${tags} 2>/dev/null|sed -s 's/ /\n/g'|grep href|tail -n 12|sed -s 's/&amp;/\n/g'|head -n 1|sed -s 's\href="/post?page=\\g'>page
-echo 请输入要下载多少页（默认`cat page`）
-read page_max
-  if [ 0$page_max = 0 ]
-  then page_max=`cat page`
-  fi
+then curl https://$booru\?tags\=${tags}\&limit\=1000 2>/dev/null|sed -n 23p|sed 's/page=/\n/g;s/&amp;/\n/g'|sed -n 3p>page
+     if ! [ 0 -lt `cat page` ]
+     then	 page_max=1
+     else	 page_max=`cat page`
+     fi
 else echo 请输入要下载多少页（理论最多1000page）
 	read page_max
 fi
 page=0
 while [ $page -lt $page_max ]
 do page=$((page+1))
-	echo https://$booru.json?tags=${tags}\&page=$page >> List
+	echo https://$booru.json?tags=${tags}\&page=$page\&limit\=1000 >> List
 done
 aria2c -i List #-j num #--http-proxy=$http_proxy --https-proxy=$https_proxy # -j：指定最高同时下载文件数量 （1～n，默认5）
 cat ${booru#*/}*|sed 's/{/\n{/g ; s/}]/}\n]/g'|

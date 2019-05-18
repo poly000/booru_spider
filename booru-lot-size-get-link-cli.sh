@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Poly000
-# CLI-1.3.1
+# CLI-1.3.2
 # able to get booru pics link as a link list text file.
 http_proxy=
 https_proxy=
@@ -86,19 +86,18 @@ while [ x$outfile = x ]
 do read outfile
 done
 if [ $booru != danbooru.donmai.us/posts ]
-then curl https://$booru\?tags\=${tags} 2>/dev/null|sed -s 's/ /\n/g'|grep href|tail -n 12|sed -s 's/&amp;/\n/g'|head -n 1|sed -s 's\href="/post?page=\\g'>page
-echo Please type how many pages you wish get \(Default: max\)
-read page_max
-  if [ 0$page_max = 0 ]
-  then page_max=`cat page`
-  fi
+then curl https://$booru\?tags\=${tags}\&limit\=1000 2>/dev/null|sed -n 23p|sed 's/page=/\n/g;s/&amp;/\n/g'|sed -n 3p>page
+     if ! [ 0 -lt `cat page` ]
+     then	 page_max=1
+     else	 page_max=`cat page`
+     fi
 else echo Please type how many pages you wish get \(Max: 1000 or others\)
-	read page_max
+	 read page_max
 fi
 page=0
 while [ $page -lt $page_max ]
 do page=$((page+1))
-	echo https://$booru.json?tags=${tags}\&page=$page >> List
+	echo https://$booru.json?tags=${tags}\&page=$page\&limit\=1000 >> List
 done
 aria2c -i List #-j num #--http-proxy=$http_proxy --https-proxy=$https_proxy # -j：Set maximum number of parallel downloads for  (1～n，default 5)
 cat ${booru#*/}*|sed 's/{/\n{/g ; s/}]/}\n]/g'|
