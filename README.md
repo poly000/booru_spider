@@ -23,7 +23,7 @@ able to filter: Questionable|Explicit|Safe
 
  no more able to custom how many pages will get (konachan, yande.re)
 
- faster to get
+ get faster
 
 * v1.3.1
 
@@ -65,11 +65,11 @@ able to filter: Questionable|Explicit|Safe
 
  fixed a function including，fixed tags search first page only，
 
- able to run out console（select output to where）
+ able to run without a console（select output to what）
 
 * v1.0.6
 
- fixed kdialog outing error
+ fixed kdialog outputing error
 
 * v1.0.5b
 
@@ -83,7 +83,7 @@ able to filter: Questionable|Explicit|Safe
 
  some changes
  
- renamed valuename
+ rename valuename
 
 * v1.0.2
 
@@ -105,7 +105,7 @@ able to filter: Questionable|Explicit|Safe
 
  no more able to custom how many pages will get (konachan, yande.re)
 
- faster to get
+ get faster
 
 * CLI-1.3.1
 
