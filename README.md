@@ -1,7 +1,7 @@
 # booru_spider
 This is a booru spider script
 
-[zh_CN.ver](README_cn.md)
+[zh_CN.ver](zh_CN.ver)
 
 needs packages `aria2` `kdialog`
 
