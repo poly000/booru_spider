@@ -1,138 +1,132 @@
 # booru_spider
-This is a booru spider script
+需要包 `aria2` `kdialog`
 
-[zh_CN.ver](zh_CN.ver)
-
-needs packages `aria2` `kdialog`
-
-CLI.ver: `aria2` `curl`
+CLI需要包 `aria2` `curl`
 
 <br>
 
-It's a booru spider script.
+这是一个Booru爬取脚本。
 
-able to get: Konachan, Danbooru, Yande.re
+支持图站: Konachan, Danbooru, Yande.re
 
-able to filter: Questionable|Explicit|Safe
+可以过滤分级（排除过滤）
 
-[CLI Update History](#cliverhistory)
+[CLI版本更新历史](#cli版本更新历史)
 
-# Update History
+# 更新历史
 
 * v1.3.2
+ 
+ 去除konachan,yande.re手动输入获取page数功能
 
- no more able to custom how many pages will get (konachan, yande.re)
-
- get faster
+ 获取提速
 
 * v1.3.1
 
- edited output
+ 微调输出
  
- fix: danbooru able to search tags
+ 修复Danbooru tag搜索
  
 * v1.3.0
  
- no more jq needs
+ 不再需要jq
  
 * v1.2.2
 
- danbooru able to search tags
+ 添加danbooru搜索标签
 
 * v1.2.1
 
- filters added
+ 添加内容分级功能
  
 * v1.2.0
 
- fixed tags no result or one page only then error
+ 修复booru无结果或者结果单页导致错误
 
 * v1.1.1
 
- fixed no selected booru then error
+ 修复booru无选择导致错误
  
- fixed tags no result or one page only then until do-loop
+ 修复tag无结果或单页后until死循环
 
 * v1.1.0
 
- fixed gets tags_page
- 
- fixed save to file
+ 修复获取的tags_page，修复保存问题
 
 * v1.1.0b
 
- added background run & stderr out，
+ 添加后台运行、stderr重定向，
 
- fixed a function including，fixed tags search first page only，
+ 修复一处函数引用，修复tags仅搜索第一page，
 
- able to run without a console（select output to what）
+ 支持从非终端启动（选择输出目录）
 
 * v1.0.6
 
- fixed kdialog outputing error
+ 修复kdialog错误
 
 * v1.0.5b
 
- used kdialog
+使用kdialog
 
 * v1.0.4
 
- able to get Danbooru
+ 初步支持Danbooru
 
 * v1.0.3
 
- some changes
- 
- rename valuename
+ 优化代码 & 变量名小写化
 
 * v1.0.2
 
- some changes
+ 优化代码
 
 * v1.0.1
 
- fixed "page_max"
+ 修复page_max问题
 
 * v1.0.0
 
- able to search tags
+ 实现搜索标签
 
-# cliverhistory
+# CLI版本更新历史
 
 * CLI-1.3.2
+ 
+ 修复tags结果单页或无出错
 
- fixed tags no result or one page only then error
+ 去除konachan,yande.re手动输入获取page数功能
 
- no more able to custom how many pages will get (konachan, yande.re)
-
- get faster
+ 获取提速
 
 * CLI-1.3.1
 
- edited output
+ 微调输出
  
- fix: danbooru able to search tags
+ 修复Danbooru tag搜索
  
 * CLI-1.3
  
- no more jq needs
+ 不再需要jq 
  
- <b>use [Git for Windows](https://git-scm.com/download/win) & [aria2](https://github.com/aria2/aria2/releases) then you can run it on shitty windows</b>
+ <b>（使用 [Git for Windows](https://git-scm.com/download/win) 以及配置好 [aria2](https://github.com/aria2/aria2/releases) 就可以在windows使用脚本了）</b>
  
 * CLI-1.2
 
- some changes
+ 去掉一些换行
  
- filters added
+ 添加分级过滤功能
  
- danbooru able to search tags
+ 修复Danbooru tag搜索
  
- outfile able to rename
+ Konachan,Yande.re tag搜索支持多分页
+ 
+ 输出文件可以设定文件名
 
 * v1.0.5b > CLI-1.1
 
- deleted some '\n'
+ 去掉一些换行
 
- some changes
+ 合并部分sed语句
 
- kdialog to read
+ kdialog改用read
