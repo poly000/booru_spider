@@ -109,5 +109,5 @@ cat ${booru#*/}*|sed 's/{/\n{/g ; s/}]/}\n]/g'|
 # grep -v 'rating":"s' | #exclude Safe
 sed 's/,/\n/g'|grep \"file_url|sed 's/"file_url":"//g;s/"//g'>$temp2
 save_file
-cp $temp2 ""${path}""
+cp $temp2 "${path}"
 rm -rf $temp0 $temp1 $temp2
