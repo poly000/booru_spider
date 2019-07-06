@@ -82,7 +82,7 @@ booru=konachan.net/post
 booru=yande.re/post
 ;;
 esac
-echo 请输入需要的tag（多tag请用“+”连接）
+echo 请输入需要的tag（多tag请用“+”连接，排除tag请用“+-”连接）
 read tags
 echo 请输入欲保存的文件名
 while [ x$outfile = x ]
