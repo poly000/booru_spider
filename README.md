@@ -3,7 +3,7 @@ This is a booru spider script
 
 [简体中文版本](https://github.com/poly000/booru_spider/tree/zh_CN.ver)
 
-needs packages `aria2` `kdialog`
+needs packages `aria2` `kdialog` `wget`
 
 CLI.ver: `aria2` `curl`
 
