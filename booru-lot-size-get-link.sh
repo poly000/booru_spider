@@ -86,7 +86,7 @@ function search_tags(){
 }
 search_tags
 set_booru
-tags=`kdialog --inputbox 请输入需要的tag（多tag请用“+”连接） 2>/dev/null`
+tags=`kdialog --inputbox 请输入需要的tag（多tag请用“+”连接，排除tag请用“+-”连接） 2>/dev/null`
 if [ $booru != danbooru.donmai.us/posts ]
 then 	wget https://$booru\?tags\="${tags}"\&limit\=1000 -o /dev/null -O - |sed -n 23p|sed 's/page=/\n/g;s/&amp;/\n/g'|sed -n 3p>page
 	if ! [ 0 -lt `cat page` ]
