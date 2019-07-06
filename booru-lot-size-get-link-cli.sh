@@ -79,7 +79,7 @@ booru=konachan.net/post
 booru=yande.re/post
 ;;
 esac
-echo Please type the tags you need \(use + connect tags, use \'+-tag\' to filter a tag\)
+echo Please type the tags you need \(use + connect tags, use +- to filter a tag\)
 read tags
 echo what filename you wish to save?
 while [ x$outfile = x ]
