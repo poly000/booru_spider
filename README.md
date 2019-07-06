@@ -1,5 +1,5 @@
 # booru_spider
-需要包 `aria2` `kdialog`
+需要包 `aria2` `kdialog` `wget`
 
 CLI需要包 `aria2` `curl`
 
