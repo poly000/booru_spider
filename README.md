@@ -15,6 +15,8 @@ able to get: Konachan, Danbooru, Yande.re
 
 able to filter: Questionable|Explicit|Safe
 
+something you maybe wish: [script4pictures](https://github.com/poly000/script4pictures)
+
 [CLI Update History](#cliverhistory)
 
 # Update History
