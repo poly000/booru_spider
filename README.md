@@ -5,6 +5,8 @@ CLI需要包 `aria2` `curl`
 
 <br>
 
+[管理图片的脚本](https://github.com/poly000/booru_spider/wiki/Some-scripts)
+
 这是一个Booru爬取脚本。
 
 支持图站: Konachan, Danbooru, Yande.re
