@@ -86,7 +86,7 @@ function search_tags(){
 }
 search_tags
 set_booru
-tags=`kdialog --inputbox Please\ type\ the\ tags\ you\ wish\ \(use\ +\ connect\ tags\) 2>/dev/null`
+tags=`kdialog --inputbox Please\ type\ the\ tags\ you\ wish\ \(use\ +\ connect\ tags, use +- to filter a tag\) 2>/dev/null`
 if [ $booru != danbooru.donmai.us/posts ]
 then 	wget https://$booru\?tags\="${tags}"\&limit=1000 -o /dev/null -O - |sed -n 23p|sed 's/page=/\n/g;s/&amp;/\n/g'|sed -n 3p>page
         if ! [ 0 -lt `cat page` ]
