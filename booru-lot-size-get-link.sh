@@ -1,5 +1,5 @@
 #!/bin/bash
-# v1.3.2
+# v1.3.3
 # Poly000
 # able to get booru pics link as a link list text file.
 http_proxy=

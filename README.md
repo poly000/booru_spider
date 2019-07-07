@@ -19,6 +19,10 @@ able to filter: Questionable|Explicit|Safe
 
 # Update History
 
+* v1.3.3
+
+ edited prompt
+
 * v1.3.2
 
  no more able to custom how many pages will get (konachan, yande.re)
@@ -28,13 +32,13 @@ able to filter: Questionable|Explicit|Safe
 * v1.3.1
 
  edited output
- 
+
  fix: danbooru able to search tags
- 
+
 * v1.3.0
- 
+
  no more jq needs
- 
+
 * v1.2.2
 
  danbooru able to search tags
@@ -42,7 +46,7 @@ able to filter: Questionable|Explicit|Safe
 * v1.2.1
 
  filters added
- 
+
 * v1.2.0
 
  fixed tags no result or one page only then error
@@ -50,13 +54,13 @@ able to filter: Questionable|Explicit|Safe
 * v1.1.1
 
  fixed no selected booru then error
- 
+
  fixed tags no result or one page only then until do-loop
 
 * v1.1.0
 
  fixed gets tags_page
- 
+
  fixed save to file
 
 * v1.1.0b
@@ -82,7 +86,7 @@ able to filter: Questionable|Explicit|Safe
 * v1.0.3
 
  some changes
- 
+
  rename valuename
 
 * v1.0.2
@@ -99,6 +103,10 @@ able to filter: Questionable|Explicit|Safe
 
 # cliverhistory
 
+* CLI-1.3.3
+
+ edited prompt
+
 * CLI-1.3.2
 
  fixed tags no result or one page only then error
@@ -110,29 +118,29 @@ able to filter: Questionable|Explicit|Safe
 * CLI-1.3.1
 
  edited output
- 
+
  fix: danbooru able to search tags
- 
+
 * CLI-1.3
- 
+
  no more jq needs
- 
+
  <b>use [Git for Windows](https://git-scm.com/download/win) & [aria2](https://github.com/aria2/aria2/releases) then you can run it on shitty windows</b>
- 
+
 * CLI-1.2
 
  some changes
- 
+
  filters added
- 
+
  danbooru able to search tags
- 
+
  outfile able to rename
 
 * v1.0.5b > CLI-1.1
 
- deleted some '\n'
+ removed some '\n'
 
- some changes
+ something changed
 
  kdialog to read
