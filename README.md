@@ -15,6 +15,8 @@ able to get: Konachan, Danbooru, Yande.re
 
 able to filter: Questionable|Explicit|Safe
 
+[some scripts to manage pictures](https://github.com/poly000/booru_spider/wiki/Some-scripts)
+
 [CLI Update History](#cliverhistory)
 
 # Update History
