@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Poly000
-# CLI-1.3.2
+# CLI-1.3.3
 # 可以爬取booru图链接为链接列表。
 http_proxy=
 https_proxy=

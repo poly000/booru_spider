@@ -15,8 +15,12 @@ CLI需要包 `aria2` `curl`
 
 # 更新历史
 
+* v1.3.3
+
+ 修改提示
+
 * v1.3.2
- 
+
  去除konachan,yande.re手动输入获取page数功能
 
  获取提速
@@ -24,13 +28,13 @@ CLI需要包 `aria2` `curl`
 * v1.3.1
 
  微调输出
- 
+
  修复Danbooru tag搜索
- 
+
 * v1.3.0
- 
+
  不再需要jq
- 
+
 * v1.2.2
 
  添加danbooru搜索标签
@@ -38,7 +42,7 @@ CLI需要包 `aria2` `curl`
 * v1.2.1
 
  添加内容分级功能
- 
+
 * v1.2.0
 
  修复booru无结果或者结果单页导致错误
@@ -46,7 +50,7 @@ CLI需要包 `aria2` `curl`
 * v1.1.1
 
  修复booru无选择导致错误
- 
+
  修复tag无结果或单页后until死循环
 
 * v1.1.0
@@ -91,8 +95,12 @@ CLI需要包 `aria2` `curl`
 
 # CLI版本更新历史
 
+* CLI-1.3.3
+
+ 修改提示
+
 * CLI-1.3.2
- 
+
  修复tags结果单页或无出错
 
  去除konachan,yande.re手动输入获取page数功能
@@ -102,25 +110,25 @@ CLI需要包 `aria2` `curl`
 * CLI-1.3.1
 
  微调输出
- 
+
  修复Danbooru tag搜索
- 
+
 * CLI-1.3
- 
- 不再需要jq 
- 
+
+ 不再需要jq
+
  <b>（使用 [Git for Windows](https://git-scm.com/download/win) 以及配置好 [aria2](https://github.com/aria2/aria2/releases) 就可以在windows使用脚本了）</b>
- 
+
 * CLI-1.2
 
  去掉一些换行
- 
+
  添加分级过滤功能
- 
+
  修复Danbooru tag搜索
- 
+
  Konachan,Yande.re tag搜索支持多分页
- 
+
  输出文件可以设定文件名
 
 * v1.0.5b > CLI-1.1
