@@ -11,8 +11,6 @@ CLI需要包 `aria2` `curl`
 
 可以过滤分级（排除过滤）
 
-你可能想要的脚本：[script4pictures](https://github.com/poly000/script4pictures)
-
 [CLI版本更新历史](#cli版本更新历史)
 
 # 更新历史
