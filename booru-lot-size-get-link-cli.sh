@@ -81,7 +81,7 @@ booru=yande.re/post
 esac
 echo Please type the tags you need \(use + connect tags, use +- to filter a tag\)
 read tags
-echo what filename you wish to save?
+echo what the filename do you wish to save as?
 while [ x$outfile = x ]
 do read outfile
 done
