@@ -1,81 +1,71 @@
 # booru_spider
-This is a booru spider script
+The script request packages `aria2` `kdialog` `wget`
 
-[简体中文版本](https://github.com/poly000/booru_spider/tree/zh_CN.ver)
-
-needs packages `aria2` `kdialog` `wget`
-
-CLI.ver: `aria2` `curl`
+And the CLI edition request only `aria2` `curl` ( curl is included in [Git for windouws](https://git-scm.com/download/win) )
 
 <br>
 
-[Some scripts to manage pictures](https://github.com/poly000/booru_spider/wiki/Some-scripts)
+[the scripts to manage pictures](https://github.com/poly000/booru_spider/wiki/%E4%B8%80%E4%BA%9B%E8%84%9A%E6%9C%AC)
 
-It's a booru spider script.
+This is a script to get URLs for booru sites,
 
-able to get: Konachan, Danbooru, Yande.re
+the script could use for get anime pictures' URLs for konachan, yande.re, danbooru,
 
-able to filter: Questionable|Explicit|Safe
+and you can exclude level(s) you wouldn't like to get
 
-[CLI Update History](#cliverhistory)
+[CLI Edition's Update History](#cli_edition_update_history)
 
 # Update History
 
+* v1.3.4
+
+ Translation updated
+
 * v1.3.3
 
- edited prompt
+ edited notice message
 
 * v1.3.2
 
- no more able to custom how many pages will get (konachan, yande.re)
-
- get faster
+ removed custom number of pictures' pages to get(except danbooru)
 
 * v1.3.1
 
- edited output
-
- fix: danbooru able to search tags
+ fixed get danbooru's pictures' URLs
 
 * v1.3.0
 
- no more jq needs
+ no more jq requests
 
 * v1.2.2
 
- danbooru able to search tags
+ now able to search danbooru's tags
 
 * v1.2.1
 
- filters added
+ added function that excludes level(s)
 
 * v1.2.0
 
- fixed tags no result or one page only then error
+ fixed a bug
 
 * v1.1.1
 
- fixed no selected booru then error
-
- fixed tags no result or one page only then until do-loop
+ fixed some bugs
 
 * v1.1.0
 
- fixed gets tags_page
-
- fixed save to file
+ fixed some bugs
 
 * v1.1.0b
 
- added background run & stderr out，
+ optimizated something
 
- fixed a function including，fixed tags search first page only，
-
- able to run without a console（select output to what）
+ fixed some bugs
 
 * v1.0.6
 
- fixed kdialog outputing error
+ fixed a bug
 
 * v1.0.5b
 
@@ -83,66 +73,54 @@ able to filter: Questionable|Explicit|Safe
 
 * v1.0.4
 
- able to get Danbooru
+ able to get danbooru's pictures' URLs
 
 * v1.0.3
 
- some changes
-
- rename valuename
+ optimizated something
 
 * v1.0.2
 
- some changes
+ optimizated something
 
 * v1.0.1
 
- fixed "page_max"
+ fixed a bug
 
 * v1.0.0
 
- able to search tags
+ Now you can search tags for booru sites
 
-# cliverhistory
+# cli_edition_update_history
 
-* CLI-1.3.3
-
- edited prompt
+* now update with the original edition
 
 * CLI-1.3.2
 
- fixed tags no result or one page only then error
+ fixed a bug
 
- no more able to custom how many pages will get (konachan, yande.re)
-
- get faster
+ removed custom number of pictures' pages to get(except danbooru)
 
 * CLI-1.3.1
 
- edited output
-
- fix: danbooru able to search tags
+ fixed a bug
 
 * CLI-1.3
 
- no more jq needs
+ no more jq requests
 
- <b>use [Git for Windows](https://git-scm.com/download/win) & [aria2](https://github.com/aria2/aria2/releases) then you can run it on shitty windows</b>
+ <b>Now you can use [Git for Windows](https://git-scm.com/download/win) and [aria2](https://github.com/aria2/aria2/releases) run the script on windows.</b>
 
 * CLI-1.2
 
- some changes
+ added function that excludes level(s)
 
- filters added
-
- danbooru able to search tags
-
- outfile able to rename
+ fixed some bugs
+ 
+ optimizated something
 
 * v1.0.5b > CLI-1.1
 
- removed some '\n'
+ optimizated something
 
- something changed
-
- kdialog to read
+ no more kdialog request

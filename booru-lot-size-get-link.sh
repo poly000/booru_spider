@@ -1,13 +1,15 @@
 #!/bin/bash
-# v1.3.3
+# v1.3.4
 # Poly000
-# able to get booru pics link as a link list text file.
+# The script could use for get anime pictures' URLs for konachan, yande.re, danbooru
+##########
+# aria2 -> -j：set out how many pictures will concurrent downloading
 http_proxy=
 https_proxy=
 temp0=`mktemp -td dir.XXXXXXXX`
 cd $temp0
 function set_booru(){
-	booru=`kdialog --menu Please\ select\ a\ booru 1 Danbooru 2 Konachan 3 Yande.re 2>/dev/null`
+	booru=`kdialog --menu "Please select a site." 1 Danbooru 2 Konachan 3 Yande.re 2>/dev/null`
 	if [ x$booru != x ]
 	then	case $booru in
 		1)
@@ -30,14 +32,14 @@ function save_file(){
 	fi
 }
 function search_tags(){
-	if tags=`kdialog --inputbox Please\ type\ the\ keyword\ to\ search\ tags 2>/dev/null`
+	if tags=`kdialog --inputbox "Please type keywords of one tag" 2>/dev/null`
 	then if [ x = x"${tags}" ]
 	     then search_tags
 	     fi
 	fi
 	if [ x != x"${tags}" ]
 	then
-		kdialog --msgbox started\ to\ search... 2>/dev/null &
+		kdialog --msgbox "Now geting..." 2>/dev/null &
 		temp1=`mktemp -t temp.XXXXXXXX`
 		exec 3> $temp1
 		echo Konachan: >&3
@@ -50,7 +52,7 @@ function search_tags(){
 			do	page_tags=$((page_tags+1))
 				echo https://konachan.net/tag.json?name="${tags}"\&page\=$page_tags >> tags
 			done
-			aria2c -i tags # -j num --http-proxy=$http_proxy --https-proxy=$https_proxy # -j：Set maximum number of parallel downloads for  (1～n，default 5)
+			aria2c -i tags #-j num #--http-proxy=$http_proxy --https-proxy=$https_proxy
 			cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
 			rm tag*
 		else	wget https://konachan.net/tag.json?name="${tags}" -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
@@ -67,7 +69,7 @@ function search_tags(){
 			do	page_tags=$((page_tags+1))
 				echo https://yande.re/tag.json?name="${tags}"\&page\=$page_tags >> tags
 			done
-			aria2c -i tags # -j num --http-proxy=$http_proxy --https-proxy=$https_proxy # -j：Set maximum number of parallel downloads for  (1～n，default 5)
+			aria2c -i tags #-j num #--http-proxy=$http_proxy --https-proxy=$https_proxy
 			cat tag.*|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
 			rm tag*
 		else	wget https://yande.re/tag.json?name="${tags}" -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
@@ -78,7 +80,7 @@ function search_tags(){
 		wget 'https://danbooru.donmai.us/tags.json?commit=Search&search[hide_empty]=yes&search[name_matches]=*'"${tags}"'*&search[order]=date&utf8=%E2%9C%93' -o /dev/null -O -|sed 's/,/\n/g'|grep \"name|sed 's/"name":"//g;s/"//g' >&3
 		rm tag*
 		kdialog --textbox $temp1 450 675 2>/dev/null &
-		if kdialog --yesno Do\ you\ wish\ search\ next\ tag? 2>/dev/null
+		if kdialog --yesno "Would you like to search the next tag?" 2>/dev/null
 		then	tags=
 			search_tags
 		fi
@@ -86,27 +88,27 @@ function search_tags(){
 }
 search_tags
 set_booru
-tags=`kdialog --inputbox Please\ type\ the\ tags\ you\ wish\ \(use\ +\ connect\ tags, use +- to filter a tag\) 2>/dev/null`
+tags=`kdialog --inputbox "Please type tag(s), 'and' use '+', 'except' use '+-'" 2>/dev/null`
 if [ $booru != danbooru.donmai.us/posts ]
-then 	wget https://$booru\?tags\="${tags}"\&limit=1000 -o /dev/null -O - |sed -n 23p|sed 's/page=/\n/g;s/&amp;/\n/g'|sed -n 3p>page
-        if ! [ 0 -lt `cat page` ]
-        then	 page_max=1
-        else	 page_max=`cat page`
-        fi
-else 	page_max=`kdialog --inputbox 'Please type how many pages you wish get (Max: 1000 or others)' 2>/dev/null`
+then 	wget https://$booru\?tags\="${tags}"\&limit\=1000 -o /dev/null -O - |sed -n 23p|sed 's/page=/\n/g;s/&amp;/\n/g'|sed -n 3p>page
+	if ! [ 0 -lt `cat page` ]
+	then	 page_max=1
+	else	 page_max=`cat page`
+	fi
+else 	page_max=`kdialog --inputbox "Please type how many page do you wish to get URLs(limited in 200pictures/page)" 2>/dev/null`
 fi
 page=0
 while [ $page -lt $page_max ]
 do 	page=$((page+1))
-	echo https://$booru.json?tags="${tags}"\&page=$page\&limit=1000 >> List
+	echo https://$booru.json?tags="${tags}"\&page=$page\&limit\=1000 >> List
 done
 temp2=`mktemp -t temp.XXXXXXXX`
-kdialog --msgbox started to get... 2>/dev/null &
-aria2c -i List #-j num #--http-proxy=$http_proxy --https-proxy=$https_proxy # -j：Set maximum number of parallel downloads for  (1～n，default 5)
+kdialog --msgbox "Now geting..." 2>/dev/null &
+aria2c -i List #-j num #--http-proxy=$http_proxy --https-proxy=$https_proxy
 cat ${booru#*/}*|sed 's/{/\n{/g ; s/}]/}\n]/g'|
-# grep -v 'rating":"q' | #exclude Questionable
-# grep -v 'rating":"e' | #exclude Explicit
-# grep -v 'rating":"s' | #exclude Safe
+# grep -v 'rating":"q' | #exclude the 'Questionable' level
+# grep -v 'rating":"e' | #exclude the 'Explicit' level
+# grep -v 'rating":"s' | #exclude the 'Safe' level
 sed 's/,/\n/g'|grep \"file_url|sed 's/"file_url":"//g;s/"//g'>$temp2
 save_file
 cp $temp2 "${path}"
