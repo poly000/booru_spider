@@ -39,7 +39,7 @@ function search_tags(){
 	fi
 	if [ x != x"${tags}" ]
 	then
-		kdialog --msgbox "Now geting..." 2>/dev/null &
+		kdialog --msgbox "Now getting..." 2>/dev/null &
 		temp1=`mktemp -t temp.XXXXXXXX`
 		exec 3> $temp1
 		echo Konachan: >&3
@@ -103,7 +103,7 @@ do 	page=$((page+1))
 	echo https://$booru.json?tags="${tags}"\&page=$page\&limit\=1000 >> List
 done
 temp2=`mktemp -t temp.XXXXXXXX`
-kdialog --msgbox "Now geting..." 2>/dev/null &
+kdialog --msgbox "Now getting..." 2>/dev/null &
 aria2c -i List #-j num #--http-proxy=$http_proxy --https-proxy=$https_proxy
 cat ${booru#*/}*|sed 's/{/\n{/g ; s/}]/}\n]/g'|
 # grep -v 'rating":"q' | #exclude the 'Questionable' level
