@@ -128,3 +128,6 @@ and you can exclude level(s) you wouldn't like to get
  optimizated something
 
  no more kdialog request
+
+
+Anyway, I'm so sorry for my poor English.
