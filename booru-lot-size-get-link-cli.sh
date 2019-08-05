@@ -22,6 +22,7 @@ then if [ x"${tags}" = x ]
      fi
 fi
 }
+a
 echo Konachan:
 curl https://konachan.net/tag?name="${tags}" 2>/dev/null|grep next_page|sed -s 's/&amp;type=">/\n/g ; s/</\n/g ; s/">/\n/g'|sed -n 29p>tags
 max_tags=`cat tags`
@@ -68,8 +69,6 @@ a
 :
 ;;
 esac
-}
-a
 echo 请选择图站（D/K/Y）
 read -s -n 1 booru
 case $booru in
