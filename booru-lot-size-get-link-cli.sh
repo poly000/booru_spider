@@ -20,12 +20,10 @@ read tags
 if [ ! x"${tags}" = xn ]
 then if [ x"${tags}" = x ]
      then a
-     else b
      fi
 fi
 }
-b()
-{
+a
 echo Konachan:
 curl https://konachan.net/tag?name="${tags}" 2>/dev/null|grep next_page|sed -s 's/&amp;type=">/\n/g ; s/</\n/g ; s/">/\n/g'|sed -n 29p>tags
 max_tags=`cat tags`
@@ -72,8 +70,6 @@ a
 :
 ;;
 esac
-}
-a
 echo "Please select a site for 'danbooru'(d), 'konachan'(k), 'yande.re'(y)"
 read -s -n 1 booru
 case $booru in
