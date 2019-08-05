@@ -20,10 +20,13 @@ read tags
 if [ ! x"${tags}" = xn ]
 then if [ x"${tags}" = x ]
      then a
+	 else a=1
      fi
 fi
 }
-a
+if [ $a != 1 ]
+then a
+fi
 echo Konachan:
 curl https://konachan.net/tag?name="${tags}" 2>/dev/null|grep next_page|sed -s 's/&amp;type=">/\n/g ; s/</\n/g ; s/">/\n/g'|sed -n 29p>tags
 max_tags=`cat tags`
