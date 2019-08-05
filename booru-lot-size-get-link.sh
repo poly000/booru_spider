@@ -1,5 +1,5 @@
 #!/bin/bash
-# v1.3.3
+# v1.3.5
 # Poly000
 # 可以爬取booru图链接为链接列表。
 http_proxy=
