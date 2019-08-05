@@ -1,10 +1,14 @@
 #!/bin/bash
 
 # Poly000
-# CLI-1.3.3
+# CLI-1.3.5
 # 可以爬取booru图链接为链接列表。
 http_proxy=
 https_proxy=
+# 注： 主机名:端口
+if [ a$http_proxy != a ]
+then alias curl="curl -e http_proxy=$http_proxy"
+fi
 path=`pwd`
 tempdir=`mktemp -td dir.XXXXXXXX`
 cd $tempdir
