@@ -21,6 +21,7 @@ then if [ x"${tags}" = x ]
      fi
 fi
 }
+a
 if [ $a != 1 ] 2> /dev/null
 then
 echo Konachan:
@@ -104,7 +105,7 @@ do page=$((page+1))
 	echo https://$booru.json?tags="${tags}"\&page=$page\&limit\=1000 >> List
 done
 aria2c -i List #-j num #--http-proxy=$http_proxy --https-proxy=$https_proxy # -j：指定最高同时下载文件数量 （1～n，默认5）
-cat ${booru#*/}*|sed 's/{/\n{/g ; s/}]/}\n]/g'|
+sed 's/{/\n{/g ; s/}]/}\n]/g' ${booru#*/}*|
 # grep -v 'rating":"q' | #排除露点分级图
 # grep -v 'rating":"e' | #排除色情分级图
 # grep -v 'rating":"s' | #排除安全分级图
