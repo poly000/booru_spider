@@ -5,6 +5,8 @@ And the CLI edition request only `aria2` `curl` ( curl is included in [Git for w
 
 <br>
 
+[简体中文版本](https://github.com/poly000/booru_spider/tree/zh_CN.ver)
+
 [the scripts to manage pictures](https://github.com/poly000/booru_spider/wiki/Some-scripts)
 
 This is a script to get URLs for booru sites,
