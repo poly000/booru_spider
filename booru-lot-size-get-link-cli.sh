@@ -5,7 +5,7 @@
 # 可以爬取booru图链接为链接列表。
 http_proxy=
 https_proxy=
-# 注： 主机名:端口
+# 注： 主机:端口 或 http://用户:口令@主机:端口
 if [ a$http_proxy != a ]
 then alias curl="curl -e http_proxy=$http_proxy"
 fi
