@@ -7,9 +7,7 @@
 http_proxy=
 https_proxy=
 # note: host:port or http://user:pwd@host:port
-if [ a$http_proxy != a ]
-then alias wget="wget -e http_proxy=$http_proxy"
-fi
+# Please replace wget as "wget -e http_proxy=$http_proxy"
 temp0=`mktemp -td dir.XXXXXXXX`
 cd $temp0
 function set_booru(){
