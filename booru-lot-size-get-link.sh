@@ -107,7 +107,7 @@ done
 temp2=`mktemp -t temp.XXXXXXXX`
 kdialog --msgbox "Now getting..." 2>/dev/null &
 aria2c -i List #-j num #--http-proxy=$http_proxy --https-proxy=$https_proxy
-cat ${booru#*/}*|sed 's/{/\n{/g ; s/}]/}\n]/g'|
+sed 's/{/\n{/g ; s/}]/}\n]/g' ${booru#*/}*|
 # grep -v 'rating":"q' | #exclude the 'Questionable' level
 # grep -v 'rating":"e' | #exclude the 'Explicit' level
 # grep -v 'rating":"s' | #exclude the 'Safe' level

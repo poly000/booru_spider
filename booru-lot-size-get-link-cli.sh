@@ -105,7 +105,7 @@ do page=$((page+1))
 	echo https://$booru.json?tags="${tags}"\&page=$page\&limit\=1000 >> List
 done
 aria2c -i List #-j num #--http-proxy=$http_proxy --https-proxy=$https_proxy
-cat ${booru#*/}*|sed 's/{/\n{/g ; s/}]/}\n]/g'|
+sed 's/{/\n{/g ; s/}]/}\n]/g' ${booru#*/}*|
 # grep -v 'rating":"q' | #exclude the 'Questionable' level
 # grep -v 'rating":"e' | #exclude the 'Explicit' level
 # grep -v 'rating":"s' | #exclude the 'Safe' level
