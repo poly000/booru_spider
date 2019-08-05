@@ -22,6 +22,7 @@ then if [ x"${tags}" = x ]
      fi
 fi
 }
+a
 if [ $a != 1 ]
 then
 echo Konachan:
