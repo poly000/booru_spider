@@ -6,9 +6,7 @@
 http_proxy=
 https_proxy=
 # 注： 主机:端口 或 http://用户:口令@主机:端口
-if [ a$http_proxy != a ]
-then alias curl="curl -x $http_proxy"
-fi
+# 请把 curl 替换为 curl -x $http_proxy
 path=`pwd`
 tempdir=`mktemp -td dir.XXXXXXXX`
 cd $tempdir
