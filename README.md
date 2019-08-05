@@ -5,7 +5,7 @@ And the CLI edition request only `aria2` `curl` ( curl is included in [Git for w
 
 <br>
 
-[the scripts to manage pictures](https://github.com/poly000/booru_spider/wiki/%E4%B8%80%E4%BA%9B%E8%84%9A%E6%9C%AC)
+[the scripts to manage pictures](https://github.com/poly000/booru_spider/wiki/Some-scripts)
 
 This is a script to get URLs for booru sites,
 
@@ -127,4 +127,8 @@ and you can exclude level(s) you wouldn't like to get
 
  optimizated something
 
- no more kdialog request
+ no more `kdialog` request
+
+
+Anyway, I'm so sorry for my poor English.
+>>>>>>> 0adf521dbcdd4c5f7664382955307adbef87e3df
