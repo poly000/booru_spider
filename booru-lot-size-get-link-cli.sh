@@ -7,7 +7,7 @@ http_proxy=
 https_proxy=
 # 注： 主机:端口 或 http://用户:口令@主机:端口
 if [ a$http_proxy != a ]
-then alias curl="curl -e http_proxy=$http_proxy"
+then alias curl="curl -x $http_proxy"
 fi
 path=`pwd`
 tempdir=`mktemp -td dir.XXXXXXXX`
@@ -19,12 +19,9 @@ read tags
 if [ ! x"${tags}" = xn ]
 then if [ x"${tags}" = x ]
      then a
-     else b
      fi
 fi
 }
-b()
-{
 echo Konachan:
 curl https://konachan.net/tag?name="${tags}" 2>/dev/null|grep next_page|sed -s 's/&amp;type=">/\n/g ; s/</\n/g ; s/">/\n/g'|sed -n 29p>tags
 max_tags=`cat tags`
