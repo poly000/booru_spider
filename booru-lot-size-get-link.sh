@@ -4,6 +4,10 @@
 # 可以爬取booru图链接为链接列表。
 http_proxy=
 https_proxy=
+# 注： 主机:端口 或 http://用户:口令@主机:端口
+if [ a$http_proxy != a ]
+then alias wget="wget -e http_proxy=$http_proxy"
+fi
 temp0=`mktemp -td dir.XXXXXXXX`
 cd $temp0
 function set_booru(){
