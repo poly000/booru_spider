@@ -7,9 +7,7 @@
 http_proxy=
 https_proxy=
 # note: host:port or http://user:pwd@host:port
-if [ a$http_proxy != a ]
-then alias curl="curl -x http://$http_proxy"
-fi
+# Please replace curl as "curl -x $http_proxy"
 path=`pwd`
 tempdir=`mktemp -td dir.XXXXXXXX`
 cd $tempdir
