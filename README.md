@@ -17,6 +17,10 @@ and you can exclude level(s) you wouldn't like to get
 
 # Update History
 
+* v1.3.5
+
+ now search tags using proxy too though one json only
+
 * v1.3.4
 
  Translation updated
