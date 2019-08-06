@@ -90,7 +90,7 @@ search_tags
 set_booru
 tags=`kdialog --inputbox 请输入需要的tag（多tag请用“+”连接，排除tag请用“+-”连接） 2>/dev/null`
 if [ $booru != danbooru.donmai.us/posts ]
-then 	wget https://$booru\?tags\="${tags}"\&limit\=1000 -o /dev/null -O - |sed -n 23p|sed 's/page=/\n/g;s/&amp;/\n/g'|sed -n 3p>page
+then 	wget https://$booru\?tags\="${tags}"\&limit\=1000 -o /dev/null -O - |grep pagination|sed 's/<a class="next_page"/\n/g ; s\</a>\\g ; s/">/\n/g'|tail -n 3|sed -n 1p > page
 	if ! [ 0 -lt `cat page` ]
 	then	 page_max=1
 	else	 page_max=`cat page`

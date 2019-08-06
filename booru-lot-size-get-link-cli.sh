@@ -91,7 +91,7 @@ while [ x$outfile = x ]
 do read outfile
 done
 if [ $booru != danbooru.donmai.us/posts ]
-then curl https://$booru\?tags\="${tags}"\&limit\=1000 2>/dev/null|sed -n 23p|sed 's/page=/\n/g;s/&amp;/\n/g'|sed -n 3p>page
+then curl https://$booru\?tags\="${tags}"\&limit\=1000 2>/dev/null|grep pagination|sed 's/<a class="next_page"/\n/g ; s\</a>\\g ; s/">/\n/g'|tail -n 3|sed -n 1p>page
      if ! [ 0 -lt `cat page` ]
      then	 page_max=1
      else	 page_max=`cat page`
