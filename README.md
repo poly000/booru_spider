@@ -1,6 +1,4 @@
-[![License](https://img.shields.io/github/license/poly000/booru_spider.svg)](https://raw.githubusercontent.com/poly000/booru_spider/master/LICENSE)
-
-[![Release](https://img.shields.io/github/release/poly000/booru_spider.svg)](https://github.com/poly000/booru_spider/releases)
+[![License](https://img.shields.io/github/license/poly000/booru_spider.svg)](https://raw.githubusercontent.com/poly000/booru_spider/master/LICENSE) [![Release](https://img.shields.io/github/release/poly000/booru_spider.svg)](https://github.com/poly000/booru_spider/releases) [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 
 
 # booru_spider
