@@ -1,6 +1,4 @@
-[![License](https://img.shields.io/github/license/poly000/booru_spider.svg)](https://raw.githubusercontent.com/poly000/booru_spider/master/LICENSE)
-
-[![Release](https://img.shields.io/github/release/poly000/booru_spider.svg)](https://github.com/poly000/booru_spider/releases)
+[![License](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://raw.githubusercontent.com/poly000/booru_spider/zh_CN.ver/LICENSE) [![Release](https://img.shields.io/github/release/poly000/booru_spider.svg)](https://github.com/poly000/booru_spider/releases) [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 
 # booru_spider
 需要包 `aria2` `kdialog` `wget`
@@ -20,6 +18,14 @@ CLI需要包 `aria2` `curl`
 [CLI版本更新历史](#cli版本更新历史)
 
 # 更新历史
+
+* v1.3.5
+
+ now search tags using proxy too though one json only
+
+* v1.3.4
+
+ Translation updated
 
 * v1.3.3
 
