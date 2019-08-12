@@ -19,6 +19,14 @@ CLI需要包 `aria2` `curl`
 
 # 更新历史
 
+* v1.3.5
+
+ now search tags using proxy too though one json only
+
+* v1.3.4
+
+ Translation updated
+
 * v1.3.3
 
  修改提示
