@@ -21,11 +21,11 @@ CLI需要包 `aria2` `curl`
 
 * v1.3.5
 
- now search tags using proxy too though one json only
+ 现在搜索标签在只获取一个json时也走代理
 
 * v1.3.4
 
- Translation updated
+ 翻译更新
 
 * v1.3.3
 
