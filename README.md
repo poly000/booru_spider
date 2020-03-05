@@ -1,6 +1,6 @@
 # booru_spider
 ![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png)
-       
+
 The script request packages `aria2` `kdialog` `wget`
 
 And the CLI edition request only `aria2` `curl` ( curl is included in [Git for windouws](https://git-scm.com/download/win) )
