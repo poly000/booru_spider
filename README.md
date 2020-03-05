@@ -1,4 +1,6 @@
 # booru_spider
+![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png)
+
 需要包 `aria2` `kdialog` `wget`
 
 CLI需要包 `aria2` `curl`
