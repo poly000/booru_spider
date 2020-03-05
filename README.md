@@ -1,5 +1,4 @@
 # booru_spider
-
 ![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png)
        
 The script request packages `aria2` `kdialog` `wget`
