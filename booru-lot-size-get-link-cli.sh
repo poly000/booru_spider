@@ -20,8 +20,6 @@ then if [ x"${tags}" = x ]
 	 else a=1
      fi
 fi
-}
-a
 if [ $a = 1 ] 2> /dev/null
 then
 echo Konachan:
@@ -71,6 +69,7 @@ a
 ;;
 esac
 fi
+}
 echo 请选择图站（D/K/Y）
 read -s -n 1 booru
 case $booru in
