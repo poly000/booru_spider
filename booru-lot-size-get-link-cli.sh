@@ -21,8 +21,6 @@ then if [ x"${tags}" = x ]
 	 else a=1
      fi
 fi
-}
-a
 if [ $a = 1 ]
 then
 echo Konachan:
@@ -72,6 +70,8 @@ a
 ;;
 esac
 fi
+}
+a
 echo "Please select a site for 'danbooru'(d), 'konachan'(k), 'yande.re'(y)"
 read -s -n 1 booru
 case $booru in

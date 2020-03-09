@@ -2,7 +2,7 @@
 
 
 # booru_spider
-The script request packages `aria2` `kdialog` `wget`
+The script request packages `aria2` `kdialog` ``wget``
 
 And the CLI edition request only `aria2` `curl` ( curl is included in [Git for windouws](https://git-scm.com/download/win) )
 
@@ -125,7 +125,7 @@ and you can exclude level(s) you wouldn't like to get
  added function that excludes level(s)
 
  fixed some bugs
- 
+
  optimizated something
 
 * v1.0.5b > CLI-1.1
@@ -136,4 +136,3 @@ and you can exclude level(s) you wouldn't like to get
 
 
 Anyway, I'm so sorry for my poor English.
-
