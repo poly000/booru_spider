@@ -1,4 +1,6 @@
 # booru_spider
+The script request packages `aria2` `kdialog` ``wget``
+=======
 ![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png)
 
 The script request packages `aria2` `kdialog` `wget`
@@ -124,7 +126,7 @@ and you can exclude level(s) you wouldn't like to get
  added function that excludes level(s)
 
  fixed some bugs
- 
+
  optimizated something
 
 * v1.0.5b > CLI-1.1
@@ -135,4 +137,3 @@ and you can exclude level(s) you wouldn't like to get
 
 
 Anyway, I'm so sorry for my poor English.
-
