@@ -70,6 +70,7 @@ a
 esac
 fi
 }
+a
 echo 请选择图站（D/K/Y）
 read -s -n 1 booru
 case $booru in
