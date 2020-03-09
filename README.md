@@ -1,8 +1,9 @@
-[![License](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://raw.githubusercontent.com/poly000/booru_spider/master/LICENSE) [![Release](https://img.shields.io/github/release/poly000/booru_spider.svg)](https://github.com/poly000/booru_spider/releases) [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu) [![HitCount](http://hits.dwyl.io/poly000/booru_spider.svg)](http://hits.dwyl.io/poly000/booru_spider)
-
-
 # booru_spider
 The script request packages `aria2` `kdialog` ``wget``
+=======
+![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png)
+
+The script request packages `aria2` `kdialog` `wget`
 
 And the CLI edition request only `aria2` `curl` ( curl is included in [Git for windouws](https://git-scm.com/download/win) )
 
