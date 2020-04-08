@@ -5,7 +5,7 @@ The script request packages `aria2` `kdialog` ``wget``
 
 The script request packages `aria2` `kdialog` `wget`
 
-And the CLI edition request only `aria2` `curl` ( curl is included in [Git for windows](https://git-scm.com/download/win) )
+And the CLI edition request only `aria2` `curl` ( curl is included in [Git for windouws](https://git-scm.com/download/win) )
 
 <br>
 
@@ -15,9 +15,9 @@ And the CLI edition request only `aria2` `curl` ( curl is included in [Git for w
 
 This is a script to get URLs for booru sites,
 
-The script could use for get anime pictures' URLs for konachan, yande.re, danbooru,
+the script could use for get anime pictures' URLs for konachan, yande.re, danbooru,
 
-And you can exclude level(s) you wouldn't like to get
+and you can exclude level(s) you wouldn't like to get
 
 [CLI Edition's Update History](#cli_edition_update_history)
 
@@ -25,7 +25,7 @@ And you can exclude level(s) you wouldn't like to get
 
 * v1.3.5
 
- Now search tags using proxy too though one json only
+ now search tags using proxy too though one json only
 
 * v1.3.4
 
@@ -33,65 +33,65 @@ And you can exclude level(s) you wouldn't like to get
 
 * v1.3.3
 
- Edited notice message
+ edited notice message
 
 * v1.3.2
 
- Removed custom number of pictures' pages to get(except danbooru)
+ removed custom number of pictures' pages to get(except danbooru)
 
 * v1.3.1
 
- Fixed get danbooru's pictures' URLs
+ fixed get danbooru's pictures' URLs
 
 * v1.3.0
 
- No more jq requests
+ no more jq requests
 
 * v1.2.2
 
- Now able to search danbooru's tags
+ now able to search danbooru's tags
 
 * v1.2.1
 
- Added function that excludes level(s)
+ added function that excludes level(s)
 
 * v1.2.0
 
- Fixed a bug
+ fixed a bug
 
 * v1.1.1
 
- Fixed some bugs
+ fixed some bugs
 
 * v1.1.0
 
- Fixed some bugs
+ fixed some bugs
 
 * v1.1.0b
 
- Optimizated something
+ optimizated something
 
- Fixed some bugs
+ fixed some bugs
 
 * v1.0.6
 
- Fixed a bug
+ fixed a bug
 
 * v1.0.5b
 
- Using kdialog
+ used kdialog
 
 * v1.0.4
 
- Able to get danbooru's pictures' URLs
+ able to get danbooru's pictures' URLs
 
 * v1.0.3
 
- Optimizated something
+ optimizated something
 
 * v1.0.2
 
- Optimizated something
+ optimizated something
 
 * v1.0.1
 
@@ -109,31 +109,31 @@ And you can exclude level(s) you wouldn't like to get
 
  fixed a bug
 
- removed custom number of pictures' pages to get(excepting danbooru)
+ removed custom number of pictures' pages to get(except danbooru)
 
 * CLI-1.3.1
 
- Fixed a bug
+ fixed a bug
 
 * CLI-1.3
 
- No more jq requests
+ no more jq requests
 
  <b>Now you can use [Git for Windows](https://git-scm.com/download/win) and [aria2](https://github.com/aria2/aria2/releases) run the script on windows.</b>
 
 * CLI-1.2
 
- Added function that excludes level(s)
+ added function that excludes level(s)
 
- Fixed some bugs
+ fixed some bugs
 
- Optimizated something
+ optimizated something
 
 * v1.0.5b > CLI-1.1
 
- Optimizated something
+ optimizated something
 
- No more `kdialog` request
+ no more `kdialog` request
 
 
 Anyway, I'm so sorry for my poor English.
