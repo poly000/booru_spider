@@ -100,7 +100,7 @@ And you can exclude level(s) you wouldn't like to get
 
  Now you can search tags for booru sites
 
-# cli_edition_update_history
+# cli\_edition\_update\_history
 
 * now update with the original edition
 
