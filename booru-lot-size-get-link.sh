@@ -2,10 +2,9 @@
 # v1.3.5
 # Poly000
 # 可以爬取booru图链接为链接列表。
-http_proxy=
-https_proxy=
+export http_proxy=
+export https_proxy=
 # 注： 主机:端口 或 http://用户:口令@主机:端口
-# 请把 wget 替换为 wget -e http_proxy=$http_proxy
 temp0=`mktemp -td dir.XXXXXXXX`
 cd $temp0
 function set_booru(){
