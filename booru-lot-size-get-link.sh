@@ -4,10 +4,10 @@
 # The script could use for get anime pictures' URLs for konachan, yande.re, danbooru
 ##########
 # aria2 -> -j：set out how many pictures will concurrent downloading
-http_proxy=
-https_proxy=
+export http_proxy=
+export https_proxy=
 # note: host:port or http://user:pwd@host:port
-# Please replace wget as "wget -e http_proxy=$http_proxy"
+
 temp0=`mktemp -td dir.XXXXXXXX`
 cd $temp0
 function set_booru(){
