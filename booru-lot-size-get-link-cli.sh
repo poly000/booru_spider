@@ -3,10 +3,10 @@
 # Poly000
 # CLI-1.3.5
 # 可以爬取booru图链接为链接列表。
-http_proxy=
-https_proxy=
+export http_proxy=
+export https_proxy=
 # 注： 主机:端口 或 http://用户:口令@主机:端口
-# 请把 curl 替换为 curl -x $http_proxy
+
 path=`pwd`
 tempdir=`mktemp -td dir.XXXXXXXX`
 cd $tempdir
